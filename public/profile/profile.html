@@ -1,0 +1,33 @@
+
+<div ng-model="user">
+  <img ng-src={{user.profile_image_url}}>
+  {{user.twitter.name}} 
+  <hr >
+  handles
+  <form ng-model=newTarget>
+    <input placeholder="handle" ng-model=newTarget.handle></input>  
+    <input placeholder="interval" ng-model=newTarget.interval></input>  
+    <button ng-model="newtarget" ng-click='addTarget(newTarget.handle,newTarget.interval)' class="btn btn-default">Add twitter handle to database</button>
+  </form>
+  <div ng-repeat="handle in handles">
+    <span>{{handle.handle}}</span>
+  </div>
+  <hr >
+  messages
+  <form ng-model=newMessage>
+    <input placeholder="message" ng-model=newMessage></input>  
+    <button ng-model="newMessage" ng-click='addMessage(newMessage)'>Add message database</button>
+  </form>
+  <div ng-repeat="message in messages">
+    <span>{{message.text}}</span>
+  </div>
+  <hr >
+  hashtags
+  <form ng-model=newHashTag>
+    <input placeholder="hashTag" ng-model=newHashTag></input>  
+    <button ng-model="newHashTag" ng-click='addHashTag(newHashTag)'>Add hashtag to database</button>
+  </form>
+  <div ng-repeat="hashTag in hashTags">
+    <span>{{hashTag.text}}</span>
+  </div> 
+</div>

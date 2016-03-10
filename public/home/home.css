@@ -1,0 +1,21 @@
+.feed{
+  position:absolute;
+  display: inline-block;
+  background-color:rgba(0,0,0,0.1);
+  width:31%;
+  min-height:500px;
+  border-radius:5px;
+  /*border:5px solid rgba(0,0,0,0.5);*/
+  margin: 0 1% 0 auto;
+  font-size:10px;
+}
+.profile{
+  margin-right:1%;
+  display: inline-block;
+  background-color:rgba(0,0,0,0.1);
+  width:65%;
+  min-height:300px;
+  border-radius:5px;
+  /*border:5px solid rgba(0,0,0,0.5);*/
+
+}
