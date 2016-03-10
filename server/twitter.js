@@ -1,10 +1,10 @@
 var Twitter = require('twitter');
-
+var twitterKeys = require('./../twitterKeys.js');
 var tweetLimit = 1;
 var tweetTimeout = 3600000;
 var likeLimit = 1;
 var likeTimeout = 60000; 
-
+var twit = new Twitter(twitterKeys);
 
 var latestMentions = [];
 var idStrings = {};
