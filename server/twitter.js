@@ -47,7 +47,7 @@ tweetBot.tweet = function(tweetString) {
 tweetBot.init = function(io){
 
   var tweetsBuffer = [];
-  twit.stream('statuses/filter', { follow:'705820064033824768' }, function(stream){
+  twit.stream('statuses/filter', { track:'javascript, angular, kendrick' }, function(stream){
     stream.on('connect', function(request) {
         console.log('Connected to Twitter API');
     });

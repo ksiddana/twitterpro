@@ -1,21 +1,17 @@
-.feed{
-  position:absolute;
-  display: inline-block;
-  background-color:rgba(0,0,0,0.1);
-  width:31%;
-  min-height:500px;
-  border-radius:5px;
-  /*border:5px solid rgba(0,0,0,0.5);*/
-  margin: 0 1% 0 auto;
-  font-size:10px;
+body {
+  padding:70px 20px 10px 20px;
+  background: url('https://images3.alphacoders.com/151/151409.jpg');
+  background-repeat: no-repeat;
 }
-.profile{
-  margin-right:1%;
+.feed {
+/*  position: relative;
+  float: right;
   display: inline-block;
-  background-color:rgba(0,0,0,0.1);
-  width:65%;
-  min-height:300px;
-  border-radius:5px;
-  /*border:5px solid rgba(0,0,0,0.5);*/
-
+  width: 50%;*/
+}
+.profile {
+/*  float:left;
+  position: relative;
+  width:50%;
+*/  /*display: inline-block;*/
 }

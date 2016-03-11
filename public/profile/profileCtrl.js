@@ -1,6 +1,7 @@
 angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
   .controller('profileCtrl',['$scope','dbFactory', 'tweetFactory',function($scope, dbFactory, tweetFactory){
     $scope.user = {};
+    $scope.toggle = 0;
     console.log('in profileCtrl');
     // load "users" profile
     tweetFactory.getUserObj("1213Coder", function (user){ $scope.user.twitter = user; });
@@ -41,5 +42,8 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
         $scope.hashTags = obj.data; 
       });
     };
+    $scope.logger = function(i) {
+      $scope.toggle = i;
+    }
   },
   ]);

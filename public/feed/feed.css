@@ -1,12 +1,16 @@
 .tweet {
-  border-radius: 5px;
-  padding: 5px 5px 5px 5px;
+  /*border-radius: 5px;*/
+  /*padding: 5px 5px 5px 5px;*/
   background-color: rgba(0, 187, 255,0.7);
-  margin-top:5px;
+  /*margin-top:5px;*/
+  font-size:10px;
   color:rgba(0,0,0,0.87);
-  /*min-height:75px;*/
+  min-height:60px;
 }
 .handle{
   /*font-size: 20px;*/
   font-weight: bold;
+}
+.feed-box{
+  background-color: rgba(0,0,0,0.1);
 }
