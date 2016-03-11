@@ -5,22 +5,31 @@
   <link rel="stylesheet" type="text/css" href="libs/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="home/home.css">
   <link rel="stylesheet" type="text/css" href="feed/feed.css">
+  <link rel="stylesheet" type="text/css" href="chart/chart.css">
   <link rel="stylesheet" type="text/css" href="profile/profile.css">
+  <link rel="stylesheet" type="text/css" href="libs/angular-chart/angular-chart.css">
+
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
 
 </head>
 <body>
   <!-- div to attach view to -->
   <div ui-view class="app-wrapper"></div>
+  
 
   <!-- Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
   <script type="text/javascript" src="libs/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
   <script src="libs/ui-bootstrap-tpls-1.2.4.min.js"></script>
+  <script src="libs/Chart/Chart.js"></script>
+  <script src="libs/angular-chart/angular-chart.js"></script>
   
   <!-- Ctrl's -->
   <script type="text/javascript" src="home/homeCtrl.js"></script>
   <script type="text/javascript" src="feed/feedCtrl.js"></script>
+  <script type="text/javascript" src="chart/chartCtrl.js"></script>
   <script type="text/javascript" src="profile/profileCtrl.js"></script>
   
   <!-- Services -->

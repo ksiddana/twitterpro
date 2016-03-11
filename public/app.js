@@ -4,8 +4,10 @@ angular.module('app', [
   'home.ctrl',
   'feed.ctrl',
   'profile.ctrl',
+  'chart.ctrl',
   'db.factory',
   'tweet.factory',
+  'chart.js',
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -22,7 +24,7 @@ angular.module('app', [
           //'nav' is the ui-view element named 'nav' thats in 'main' states template (mainDisplay.html)
           'feed@home': { templateUrl: 'feed/feed.html', controller: 'feedCtrl' },
           'profile@home': { templateUrl: '/profile/profile.html', controller: 'profileCtrl' },
-          // 'map@main': { templateUrl: '/map/map.html', controller:'mapCtrl' },
+          'chart@home': { templateUrl: '/chart/chart.html', controller:'chartCtrl' },
           // 'donate@main': { templateUrl: '/donate/donate.html', controller:'donateCtrl' },
         },
     });
@@ -30,7 +32,14 @@ angular.module('app', [
   
   $urlRouterProvider.otherwise('/');
 
+})
+.run(function($rootScope){
+  $rootScope.hashTagKeys,$rootScope.hashTagValues;  
+  console.log($rootScope.hashTagData);
+  
 });
+
+
 
 // .controller('mainCtrl', function($scope) {
 

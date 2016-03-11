@@ -1,6 +1,6 @@
 angular.module('feed.ctrl', ['tweet.factory'])
   
-.controller('feedCtrl', ['$scope','tweetFactory','$http', function ($scope, tweetFactory, $http) {
+.controller('feedCtrl', ['$scope','tweetFactory','$http', '$rootScope', function ($scope, tweetFactory, $http, $rootScope) {
   console.log('feedCTRL');
   
   $scope.tweets=[];
@@ -8,11 +8,11 @@ angular.module('feed.ctrl', ['tweet.factory'])
     console.log(tweet);
   };
   tweetFactory.stream.on('tweets', function(data){
-    console.log($scope.tweets);
+    tweetFactory.handleTweet(data[0]);
     $scope.tweets = data.concat($scope.tweets);
-    if($scope.tweets.length > 5){
-      $scope.tweets.length = 5;
-    }
+      // if($scope.tweets.length > 5){
+    //   $scope.tweets.length = 5;
+    // }
   });
 },
 ]);

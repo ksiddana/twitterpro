@@ -129,8 +129,6 @@ var autoTweet = function () {
       });
     });
   });
- 
-  
 };
 // autoTweet();  
 console.log('app listening: ', port);

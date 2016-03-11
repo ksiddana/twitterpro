@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://localhost:3000/#/ -->
+<html lang="en-us" ng-app="app" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style><style type="text/css">.uib-time input{width:50px;}</style><style type="text/css">[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-bottom > .tooltip-arrow,[uib-popover-popup].popover.top-left > .arrow,[uib-popover-popup].popover.top-right > .arrow,[uib-popover-popup].popover.bottom-left > .arrow,[uib-popover-popup].popover.bottom-right > .arrow,[uib-popover-popup].popover.left-top > .arrow,[uib-popover-popup].popover.left-bottom > .arrow,[uib-popover-popup].popover.right-top > .arrow,[uib-popover-popup].popover.right-bottom > .arrow{top:auto;bottom:auto;left:auto;right:auto;margin:0;}[uib-popover-popup].popover,[uib-popover-template-popup].popover{display:block !important;}</style><style type="text/css">.uib-datepicker .uib-title{width:100%;}.uib-day button,.uib-month button,.uib-year button{min-width:100%;}.uib-datepicker-popup.dropdown-menu{display:block;float:none;margin:0;}.uib-button-bar{padding:10px 9px 2px;}.uib-left,.uib-right{width:100%}</style><style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll;}</style><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+  <title>tga bot</title>
+  <link rel="stylesheet" type="text/css" href="./tga bot_files/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./tga bot_files/home.css">
+  <link rel="stylesheet" type="text/css" href="./tga bot_files/feed.css">
+  <link rel="stylesheet" type="text/css" href="./tga bot_files/chart.css">
+  <link rel="stylesheet" type="text/css" href="./tga bot_files/profile.css">
+  <link rel="stylesheet" type="text/css" href="./tga bot_files/angular-chart.css">
+
+<link href="./tga bot_files/css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>
+  <!-- div to attach view to -->
+  <!-- uiView:  --><div ui-view="" class="app-wrapper ng-scope"><div class="ng-scope">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <img alt="Brand" src="./tga bot_files/twitter-dead-cropped.png" class="icon">
+      <div class="navbar-brand">twi-derp.ro</div>
+    </div>
+  </nav>
+  <!-- uiView: profile --><div ui-view="profile" class="profile ng-scope">
+<div ng-model="user" class="profile-main ng-pristine ng-untouched ng-valid ng-scope ng-not-empty">
+<!-- <img ng-src={{user.twitter.profile_image_url}}> -->
+<div>
+  
+<div active="active" class="ng-isolate-scope">
+  <ul class="nav nav-tabs" ng-class="{&#39;nav-stacked&#39;: vertical, &#39;nav-justified&#39;: justified}" ng-transclude="">
+    <li ng-class="[{active: active, disabled: disabled}, classes]" class="uib-tab nav-item ng-scope ng-isolate-scope active" index="0" heading="targets" ng-click="logger(0)">
+  <a href="" ng-click="select()" class="nav-link ng-binding" uib-tab-heading-transclude="">targets</a>
+</li>
+    <li ng-class="[{active: active, disabled: disabled}, classes]" class="uib-tab nav-item ng-scope ng-isolate-scope" index="1" heading="messages" ng-click="logger(1)">
+  <a href="" ng-click="select()" class="nav-link ng-binding" uib-tab-heading-transclude="">messages</a>
+</li>
+    <li ng-class="[{active: active, disabled: disabled}, classes]" class="uib-tab nav-item ng-scope ng-isolate-scope" index="2" heading="hashtags" ng-click="logger(2)">
+  <a href="" ng-click="select()" class="nav-link ng-binding" uib-tab-heading-transclude="">hashtags</a>
+</li>
+</ul>
+  <div class="tab-content">
+    <!-- ngRepeat: tab in tabset.tabs --><div class="tab-pane ng-scope active" ng-repeat="tab in tabset.tabs" ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab">
+    </div><!-- end ngRepeat: tab in tabset.tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabset.tabs" ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab">
+    </div><!-- end ngRepeat: tab in tabset.tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabset.tabs" ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab">
+    </div><!-- end ngRepeat: tab in tabset.tabs -->
+  </div>
+</div>
+<div class="profile-box">
+  
+<!-- handles -->
+<div class="card card-block" ng-show="toggle === 0">
+  <h4 class="card-title">targets</h4>
+  <p class="card-text"></p>
+<form class="form-inline ng-pristine ng-valid">
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputEmail3">handle</label>
+      <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="exampleInputEmail3" placeholder="handle" ng-model="newTarget.handle">
+      <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="interval" ng-model="newTarget.interval"> 
+    <button type="submit" class="btn btn-primary ng-pristine ng-untouched ng-valid ng-empty" ng-model="newtarget" ng-click="addTarget(newTarget.handle,newTarget.interval)">add target</button>
+    </div>
+  </form>
+  <ul class="list-group">
+  <!-- ngRepeat: handle in handles --><li class="list-group-item ng-scope" ng-repeat="handle in handles">
+    <span class="ng-binding">elias</span>
+  </li><!-- end ngRepeat: handle in handles --><li class="list-group-item ng-scope" ng-repeat="handle in handles">
+    <span class="ng-binding">mom</span>
+  </li><!-- end ngRepeat: handle in handles --><li class="list-group-item ng-scope" ng-repeat="handle in handles">
+    <span class="ng-binding">lolo</span>
+  </li><!-- end ngRepeat: handle in handles --><li class="list-group-item ng-scope" ng-repeat="handle in handles">
+    <span class="ng-binding">raph</span>
+  </li><!-- end ngRepeat: handle in handles -->
+</ul>
+</div>
+<!-- messages -->
+<div class="card card-block messages ng-hide" ng-show="toggle === 1">
+  <h4 class="card-title">messages</h4>
+  <p class="card-text"></p>
+  <form class="form-inline ng-pristine ng-untouched ng-valid ng-empty" ng-model="newMessage">
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputEmail3">handle</label>
+      <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="exampleInputEmail3" placeholder="message" ng-model="newMessage">
+    <button type="submit" class="btn btn-primary ng-pristine ng-untouched ng-valid ng-empty" ng-model="newMessage" ng-click="addMessage(newMessage)">add message</button>
+    </div>
+  </form>
+  
+  
+  <ul class="list-group">
+  <!-- ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">Douglas Crockford, JAVASCRIPT: THE GOOD PARTS. #books https://t.co/kDZbzhB3Yr</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">Secrets Of The Javascript Ninja here https://t.co/vJMF6kefbd #emberjs @javascriptbot_</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">A lot of companies are using ES6 today. Learn how: https://medium.com/javascript-scene/how-to-learn-es6-47d9a1ac2620 … #JavaScript</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">@nixcraft: Beginner’s Guide to Installing Node.js on a Raspberry Pi https://t.co/0Iudv0B4Da #linux #nodejs #sysadmin</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">Ray Kurzweil: Robots will take our jobs, but we'll create new ones that make us happier http://entm.ag/1Ld5BhB  @neiltyson @92Y #ThatsGenius</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">Google is using machine learning to teach robots how to grasp random objects http://tcrn.ch/1YsTuPa  by @fredericl</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">haha http://i.imgur.com/Odu0xMp.gif</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">haha https://i.imgur.com/rYfvEtc.gifv</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">Urlang: JavaScript with Racket-like syntax https://t.co/40yWBljX28 (cmts https://t.co/UAQnWC82q7)</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding">http://i.imgur.com/pTTn9Hu.gifv</span>
+  </li><!-- end ngRepeat: message in messages --><li class="list-group-item ng-scope" ng-repeat="message in messages">
+    <span class="ng-binding"></span>
+  </li><!-- end ngRepeat: message in messages -->
+</ul>
+</div>
+<!-- hashtags -->
+<div class="card card-block ng-hide" ng-show="toggle === 2">
+  <h4 class="card-title">hashtags</h4>
+  <p class="card-text"></p>
+  <form class="form-inline ng-pristine ng-untouched ng-valid ng-empty" ng-model="newHashTag">
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputEmail3">handle</label>
+      <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="exampleInputEmail3" placeholder="hashTag" ng-model="newHashTag">
+    <button type="submit" class="btn btn-primary ng-pristine ng-untouched ng-valid ng-empty" ng-model="newHashTag" ng-click="addHashTag(newHashTag)">add hashtag</button>
+    </div>
+  </form>
+  <ul class="list-group">
+  <!-- ngRepeat: hashTag in hashTags --><li class="list-group-item ng-scope" ng-repeat="hashTag in hashTags">
+    <span class="ng-binding">yolo</span>
+  </li><!-- end ngRepeat: hashTag in hashTags --><li class="list-group-item ng-scope" ng-repeat="hashTag in hashTags">
+    <span class="ng-binding">enjoyTheJourney</span>
+  </li><!-- end ngRepeat: hashTag in hashTags --><li class="list-group-item ng-scope" ng-repeat="hashTag in hashTags">
+    <span class="ng-binding">puttingInWork</span>
+  </li><!-- end ngRepeat: hashTag in hashTags --><li class="list-group-item ng-scope" ng-repeat="hashTag in hashTags">
+    <span class="ng-binding">loveToCode</span>
+  </li><!-- end ngRepeat: hashTag in hashTags -->
+</ul>
+</div>
+</div>
+</div></div></div>
+  <!-- uiView: feed --><div ui-view="feed" class="feed ng-scope"><div class="feed-main ng-scope">
+
+  <div active="active" class="ng-isolate-scope">
+  <ul class="nav nav-tabs" ng-class="{&#39;nav-stacked&#39;: vertical, &#39;nav-justified&#39;: justified}" ng-transclude="">
+    <li ng-class="[{active: active, disabled: disabled}, classes]" class="uib-tab nav-item ng-scope ng-isolate-scope active" index="0" heading="Static title">
+  <a href="" ng-click="select()" class="nav-link ng-binding" uib-tab-heading-transclude="">Static title</a>
+</li>
+  </ul>
+  <div class="tab-content">
+    <!-- ngRepeat: tab in tabset.tabs --><div class="tab-pane ng-scope active" ng-repeat="tab in tabset.tabs" ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab">
+    </div><!-- end ngRepeat: tab in tabset.tabs -->
+  </div>
+</div>
+
+  <div class="feed-box">
+    
+  <h4 class="card-title">twitter feed</h4>
+  <p class="card-text"></p>
+
+  <form class="form-inline ng-pristine ng-valid">
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputEmail3">tweet</label>
+      <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="exampleInputEmail3" placeholder="Enter tweet" ng-model="tweet">
+    <button type="submit" class="btn btn-primary" ng-click="test(tweet)">Tweet</button>
+    </div>
+  </form>
+
+  <ul class="list-group">
+    <!-- ngRepeat: tweet in tweets --><li class="list-group-item tweet ng-scope" ng-repeat="tweet in tweets">
+      <em>
+        <span class="handle ng-binding">•</span>
+      </em>
+      <span class="tweet-text ng-binding">Kendrick Lamar - Cloud 10 💙 https://t.co/17wUIR5AYx</span>
+    </li><!-- end ngRepeat: tweet in tweets --><li class="list-group-item tweet ng-scope" ng-repeat="tweet in tweets">
+      <em>
+        <span class="handle ng-binding">Malvo</span>
+      </em>
+      <span class="tweet-text ng-binding">Bumping on Kendrick Lamar untitled track 2 🔥🔥🔥🔥🔥</span>
+    </li><!-- end ngRepeat: tweet in tweets --><li class="list-group-item tweet ng-scope" ng-repeat="tweet in tweets">
+      <em>
+        <span class="handle ng-binding">i Web Designer</span>
+      </em>
+      <span class="tweet-text ng-binding">"Angular Material : &amp;lt;md-chips&amp;gt; validation?" #angularjs #coding  https://t.co/0eYmW7h18k</span>
+    </li><!-- end ngRepeat: tweet in tweets -->
+  </ul>
+  </div>
+ 
+</div></div>
+  <!-- uiView: chart --><div ui-view="chart" class="chart ng-scope"></div>
+
+
+</div></div>
+  
+
+  <!-- Dependencies -->
+  <script src="./tga bot_files/socket.io.min.js"></script>
+  <script type="text/javascript" src="./tga bot_files/angular.min.js"></script>
+  <script src="./tga bot_files/angular-ui-router.js"></script>
+  <script src="./tga bot_files/ui-bootstrap-tpls-1.2.4.min.js"></script>
+  <script src="./tga bot_files/Chart.js"></script>
+  <script src="./tga bot_files/angular-chart.js"></script>
+  
+  <!-- Ctrl's -->
+  <script type="text/javascript" src="./tga bot_files/homeCtrl.js"></script>
+  <script type="text/javascript" src="./tga bot_files/feedCtrl.js"></script>
+  <script type="text/javascript" src="./tga bot_files/chartCtrl.js"></script>
+  <script type="text/javascript" src="./tga bot_files/profileCtrl.js"></script>
+  
+  <!-- Services -->
+  <script type="text/javascript" src="./tga bot_files/tweetFactory.js"></script>
+  <script type="text/javascript" src="./tga bot_files/dbFactory.js"></script>
+  <!-- <script type="text/javascript" src="home/homeService.js"></script> -->
+  
+  <!-- APP -->
+  <script type="text/javascript" src="./tga bot_files/app.js"></script>
+
+
+</body><div></div><div></div></html>

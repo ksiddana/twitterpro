@@ -1,0 +1,33 @@
+html{
+  max-width:1300px;
+}
+body {
+  padding:70px 20px 10px 20px;
+  background: url('http://wallpapercave.com/wp/jgZcrie.jpg');
+  /*background: url('http://hdimagesnew.com/wp-content/uploads/2015/11/White-Texture-HD-Backgrounds.jpg');*/
+  background-repeat: no-repeat;
+}
+.feed {
+  /*position: absolute;*/
+  display: inline-block;
+  width:40%;
+  float:right;
+  vertical-align: top;
+}
+.profile {
+  /*position: absolute;*/
+  width:60%;
+  display: inline-block;
+  vertical-align: top;
+}
+.navbar-brand{
+  font-family: 'lobster',cursive;
+  font-size:30px;
+}
+.icon{
+  position: relative;
+  top: 10px;
+  left: 5px;
+  height:30px;
+  background-color:rgba(0,0,0,0);
+}

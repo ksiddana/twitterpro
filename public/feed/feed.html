@@ -1,10 +1,10 @@
-<div>
+<div class="feed-main">
 
   <uib-tabset active="active">
     <uib-tab index="0" heading="Static title"></uib-tab>
-
   </uib-tabset>
-  <div class="container feed-box">
+
+  <div class="feed-box">
     
   <h4 class="card-title">twitter feed</h4>
   <p class="card-text"></p>
@@ -12,7 +12,7 @@
   <form class="form-inline">
     <div class="form-group">
       <label class="sr-only" for="exampleInputEmail3">tweet</label>
-      <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter tweet" ng-model="tweet">
+      <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter tweet" ng-model="tweet">
     <button type="submit" class="btn btn-primary" ng-click="test(tweet)">Tweet</button>
     </div>
   </form>
