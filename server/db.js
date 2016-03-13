@@ -92,6 +92,20 @@ helpers.handleGet = function(model,searchObject, callback) {
   }
 };
 
+//HANDLES DELETE REQUESTS TO /API/MODELS
+helpers.handleDelete = function (model, searchObject, callback) {
+  console.log('DB deleting: ' model);
+  console.log('searchObject: ', searchObject );
+  models[model].find(searchObject).remove(function(err, result){
+    if (err) {
+      console.log('DB error in delete', err);
+    } else {
+    console.log('delete successful'); 
+    callback(result);
+    }
+  });
+};
+
 // HANDLES POST REQUESTS TO /API/MODELS
 helpers.handlePost = function (model, payload, callback) {
   console.log('DB POST api/models CREATING NEW: ', model);
@@ -106,81 +120,97 @@ helpers.handlePost = function (model, payload, callback) {
   });
 };
 
+// HANDLES PUT REQUESTS TO /API/MODELS
+helpers.handlePut = function(model, payload, callback){
+  console.log('DB PUT api/models Updating', model);
+  console.log('payload: ', payload);
+  models[model].update(payload.user, {$set: payload.update}, function (err, result){
+    if (err) {
+      console.log('DB error on UPDATE: ', model);
 
-helpers.createUser = function(user, callback) {
-  console.log('-----DB-----');
-  console.log('Creating a user');
-  console.log('user: ', user);
-  console.log('------------');
-
-  new User({username:user.username, password:user.password, twitterId: user.twitter, admin:user.admin}).save(function(err,user){
-    if ( err ) {
-      console.log('DB: err saving new user ', err);
+    } else {
+      console.log('DB success on UPDATE: ');
+      callback(result);
+      
     }
-    console.log('DB: saving success', user);
-    callback(user);
   });
 };
 
-// targets/handles
-helpers.addTarget = function (handle, interval, res){
-  console.log('IN HELPERS.ADDTARGET :');
-  console.log('handle: ', handle, 'int: ', interval, 'res: ', res);
-  new Target({handle: handle, interval:interval}).save(
-    function(err, target){
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("SUCCES SAVING ", target);
-        Target.find({}).then(function(obj){
-          res.status(200).send(obj);
-        });
-      }
-    });
-};
 
-// 
+// helpers.createUser = function(user, callback) {
+//   console.log('-----DB-----');
+//   console.log('Creating a user');
+//   console.log('user: ', user);
+//   console.log('------------');
 
-helpers.allTargets = function(res){
-  Target.find({}).then(function(obj){
-    console.log('sending data with response code 200 in DB', obj);
-    res.status(200).send(obj);
-  });
-};
+//   new User({username:user.username, password:user.password, twitterId: user.twitter, admin:user.admin}).save(function(err,user){
+//     if ( err ) {
+//       console.log('DB: err saving new user ', err);
+//     }
+//     console.log('DB: saving success', user);
+//     callback(user);
+//   });
+// };
 
-// messages 
-helpers.addMessage = function (text, res){
-  console.log('IN HELPERS.ADDTARGET :');
-  new Message({text: text}).save(
-    function(err, target){
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("SUCCES SAVING ", target);
-        Message.find({}).then(function(obj){
-          res.status(200).send(obj);
-        });
-      }
-    });
-};
+// // targets/handles
+// helpers.addTarget = function (handle, interval, res){
+//   console.log('IN HELPERS.ADDTARGET :');
+//   console.log('handle: ', handle, 'int: ', interval, 'res: ', res);
+//   new Target({handle: handle, interval:interval}).save(
+//     function(err, target){
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         console.log("SUCCES SAVING ", target);
+//         Target.find({}).then(function(obj){
+//           res.status(200).send(obj);
+//         });
+//       }
+//     });
+// };
+
+// // 
+
+// helpers.allTargets = function(res){
+//   Target.find({}).then(function(obj){
+//     console.log('sending data with response code 200 in DB', obj);
+//     res.status(200).send(obj);
+//   });
+// };
+
+// // messages 
+// helpers.addMessage = function (text, res){
+//   console.log('IN HELPERS.ADDTARGET :');
+//   new Message({text: text}).save(
+//     function(err, target){
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         console.log("SUCCES SAVING ", target);
+//         Message.find({}).then(function(obj){
+//           res.status(200).send(obj);
+//         });
+//       }
+//     });
+// };
 
 
-// hash tag 
-helpers.addHashTag = function (hashTag, res){
-  console.log('IN HELPERS.addHashTag:');
-  console.log('hashtag',hashTag);
-  new HashTag({text:hashTag}).save(
-    function(err, target){
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("SUCCES SAVING ", hashTag);
-        HashTag.find({}).then(function(obj){
-          res.status(200).send(obj);
-        });
-      }
-    });
-};
+// // hash tag 
+// helpers.addHashTag = function (hashTag, res){
+//   console.log('IN HELPERS.addHashTag:');
+//   console.log('hashtag',hashTag);
+//   new HashTag({text:hashTag}).save(
+//     function(err, target){
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         console.log("SUCCES SAVING ", hashTag);
+//         HashTag.find({}).then(function(obj){
+//           res.status(200).send(obj);
+//         });
+//       }
+//     });
+// };
 
 console.log('db is feeling good');
 module.exports = {
