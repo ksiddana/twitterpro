@@ -6,18 +6,26 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
     // load "users" profile
     tweetFactory.getUserObj("1213Coder", function (user){ $scope.user.twitter = user; });
 
-    dbFactory.getTargets(function(obj){
-      console.log('handles');
-      console.log(obj.data);
-      $scope.handles = obj.data;
+    // get data and save to scope
+    // targets
+    dbFactory.getModel('target', '/all/true', function (results){
+      $scope.targets = results;
+    });
+    // messages
+    dbFactory.getModel('message', '/all/true', function (results){
+      $scope.messages = results;
+    });
+    // hashtags
+    dbFactory.getModel('hashtags', '/all/true', function (results){
+      $scope.hashtags = results;
     });
 
-    $scope.addTarget = function (handle, interval, callback){
-      dbFactory.addTarget(handle,interval,function(obj){
-        console.log('success in add target', obj.data);
-        $scope.handles = obj.data; 
-      });
-    };
+    // $scope.addTarget = function (handle, interval, callback){
+    //   dbFactory.addTarget(handle,interval,function(obj){
+    //     console.log('success in add target', obj.data);
+    //     $scope.handles = obj.data; 
+    //   });
+    // };
       dbFactory.getMessages(function(obj){
       console.log('messages');
       console.log(obj.data);

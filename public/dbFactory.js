@@ -4,62 +4,42 @@
 .factory('dbFactory', ['$http','$rootScope', function ($http, $rootScope) {
   var factory = {};
 
-//targets
-  factory.getTargets = function (callback) {
-    console.log('requesting handles');
-    $http.get('//localhost:3000/allTargets').then(function(obj){
-      console.log('GOT handles', obj);
-      callback(obj);
-    });
-  };
+// crud functionality for all models
+factory.getModel = function (type, searchTerms, callback){
+  console.log('getting models');
+  console.log('type: ', type);
+  $http.get('//localhost:3000/api/models/' + type + searchTerms).then(function(results){
+    console.log('successs in getting models', results.data);
+    callback(results.data);
+  });
+};
 
-  factory.addTarget = function (handle, interval, callback) {
-   console.log('adding handle: ', handle);
-   $http.post('//localhost:3000/addTarget', {handle: handle, interval:interval}).then(function(obj){
-      console.log('factory success invoking callback');
-      callback(obj);
-   });
-  };
-  // messages
-  factory.getMessages = function (callback) {
-    console.log('requesting handles');
-    $http.get('//localhost:3000/getMessages').then(function(obj){
-      console.log('GOT messages', obj);
-      callback(obj);
-    });
-  };
+factory.deleteModel = function (type, searchTerms, callback) {
+  console.log('deleting models');
+  console.log('type: ', type);
+  $http.delete('//localhost:3000/api/models/' + type + searchTerms).then(function(results){
+    console.log('success in deleting model');
+    callback(results.data);
+  });
+};
 
-  factory.addMessage = function (text, callback) {
-   console.log('adding message: ', text);
-   $http.post('//localhost:3000/addMessage', {text:text}).then(function(obj){
-      console.log('factory success invoking callback');
-      callback(obj);
-   });
-  };
-  //hashtags
-  factory.getHashTags = function (callback) {
-    console.log('requesting hashtags');
-    $http.get('//localhost:3000/getHashTags').then(function(obj){
-      console.log('GOT hashtags', obj);
-      callback(obj);
-    });
-  };
+factory.updateModel = function(type, searchTerms, payload, callback ) {
+  console.log('updating model');
+  console.log('type: ', type);
+  $http.put('//localhost:3000/' + type + searchTerms, payload).then(function (results){
+    console.log('success in updating model');
+    callback(results.data);
+  });
+};
 
-  factory.addHashTag = function (text, callback) {
-   console.log('adding hashtag: ', text);
-   $http.post('//localhost:3000/addHashTag', {text:text}).then(function(obj){
-      console.log('factory success invoking callback');
-      callback(obj);
-   });
-  };
-  // users
-  factory.createUser = function (user) {
-    user.auth ? user.auth = user.auth : user.auth = 0;
-
-    $http.post('//localhost:3000/api/models/user', user).then(function (user) {
-      console.log('success saving user!', user);
-    });
-  };
+factory.createModel = function(type, search, payload, callback){
+  console.log('creating model');
+  console.log('type', type);
+  $http.post('//localhost:3000/' + type + searchTerms, payload).then(function (results) {
+    console.log('success in creating model');
+    callback(results.data);
+  });
+};
 
 
   return factory;

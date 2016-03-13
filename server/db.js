@@ -94,7 +94,7 @@ helpers.handleGet = function(model,searchObject, callback) {
 
 //HANDLES DELETE REQUESTS TO /API/MODELS
 helpers.handleDelete = function (model, searchObject, callback) {
-  console.log('DB deleting: ' model);
+  console.log('DB deleting: ', model);
   console.log('searchObject: ', searchObject );
   models[model].find(searchObject).remove(function(err, result){
     if (err) {
