@@ -1,0 +1,23 @@
+.tweet {
+  /*border-radius: 5px;*/
+  padding: 5px 5px 5px 5px;
+  background-color: rgba(255,255,255,0.87);
+  /*margin-top:5px;*/
+  font-size:12px;
+  min-height:85px;
+}
+.tweet-text{
+  color:rgba(0,0,0,0.87);
+}
+.handle{
+  /*font-size: 20px;*/
+  font-weight: bold;
+}
+.feed-box{
+  background-color: rgba(255,255,255,0.8);
+  padding: 15px 15px 15px 15px;
+  height:600px;
+}
+.feed-main{
+
+}

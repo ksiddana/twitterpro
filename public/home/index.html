@@ -1,7 +1,12 @@
 <div>
-  <h1>Welecome to TGA.bot</h1>
-
-  <div class="profile" ui-view="profile"></div>
-  <div class="feed" ui-view="feed"></div>
-
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <img alt="Brand" src="libs/twitter-dead-cropped.png" class='icon'>
+      <div class="navbar-brand">twi-derp.ro</div>
+    </div>
+  </nav>
+  <div ui-view="auth" class="auth"></div>
+  <div ui-view="profile" class="profile"></div>
+  <div ui-view="feed" class="feed"></div>
+  <div ui-view="chart" class="chart"></div>
 </div>

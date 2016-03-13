@@ -9,6 +9,7 @@
   "author": "raphael baskerville",
   "license": "ISC",
   "dependencies": {
+    "morgan": "^1.7.0",
     "twitter": "^1.2.5"
   }
 }

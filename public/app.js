@@ -3,9 +3,12 @@ angular.module('app', [
   'ui.bootstrap',
   'home.ctrl',
   'feed.ctrl',
+  'auth.ctrl',
   'profile.ctrl',
+  'chart.ctrl',
   'db.factory',
   'tweet.factory',
+  'chart.js',
 ])
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -14,23 +17,25 @@ angular.module('app', [
     .state('home', {
       url:'/',
        views: {
-          '@': {  // unnamed ui-view element thats in the index.html
+          '@': {
             templateUrl: 'home/index.html',
             controller: 'homeCtrl',
           },
-
-          //'nav' is the ui-view element named 'nav' thats in 'main' states template (mainDisplay.html)
+          'auth@home': { templateUrl: 'auth/auth.html', controller: 'authCtrl' },
           'feed@home': { templateUrl: 'feed/feed.html', controller: 'feedCtrl' },
           'profile@home': { templateUrl: '/profile/profile.html', controller: 'profileCtrl' },
-          // 'map@main': { templateUrl: '/map/map.html', controller:'mapCtrl' },
-          // 'donate@main': { templateUrl: '/donate/donate.html', controller:'donateCtrl' },
+          'chart@home': { templateUrl: '/chart/chart.html', controller:'chartCtrl' },
         },
-    });
-    
-  
+    });  
   $urlRouterProvider.otherwise('/');
+})
 
+.run(function($rootScope){
+  console.log($rootScope.hashTagData); 
+  $rootScope.hashTagKeys,$rootScope.hashTagValues;  
 });
+
+
 
 // .controller('mainCtrl', function($scope) {
 

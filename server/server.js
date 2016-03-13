@@ -1,13 +1,27 @@
 var express = require('express');
-var db = require('./db.js');
-var port = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
-var tweetBot = require('./twitter.js');
+var morgan = require('morgan');
 var schedule = require('node-schedule');
 
+// twitter bot 
+var tweetBot = require('./twitter.js');
+
+// database
+var db = require('./db.js');
+
+// server config
+var port = process.env.PORT || 3000;
 var app = express();
+
+// middleware
 app.use(express.static(__dirname + './../public'));
 app.use(bodyParser.json());
+
+//subrouters
+app.use('/api', apiRouter);
+
+
+
 
 app.post('/ezTweet', function (req,res){
   console.log('post to ezTweet recieved', req.body);
@@ -22,6 +36,11 @@ app.post('/ezTweet', function (req,res){
 ///////////////////////////////////
 /////////dbroutes///////////////
 ///////////////////////////////////
+
+app.get('/api/:model/:data') {
+
+};
+
 
 app.get('/allTargets', function (req,res) {
   db.helpers.allTargets(res);
@@ -44,7 +63,15 @@ app.get('/getHashTags', function (req,res) {
 app.post('/addHashTag', function (req,res) {
   db.helpers.addHashTag(req.body.text, res);
 });
-
+// users
+app.post('/users', function (req, res) {
+  db.helpers.createUser(req.body, function(user){
+    console.log('user', user);
+    
+    console.log('back in server.js post /users callback', user);
+    res.status(200).send(user);
+  });
+});
 
 
 
@@ -129,10 +156,8 @@ var autoTweet = function () {
       });
     });
   });
- 
-  
 };
-autoTweet();  
+// autoTweet();  
 console.log('app listening: ', port);
 var server = app.listen(port);
 var io = require('socket.io').listen(server);

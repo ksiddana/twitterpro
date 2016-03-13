@@ -4,7 +4,7 @@
 .factory('dbFactory', ['$http','$rootScope', function ($http, $rootScope) {
   var factory = {};
 
-
+//targets
   factory.getTargets = function (callback) {
     console.log('requesting handles');
     $http.get('//localhost:3000/allTargets').then(function(obj){
@@ -20,6 +20,7 @@
       callback(obj);
    });
   };
+  // messages
   factory.getMessages = function (callback) {
     console.log('requesting handles');
     $http.get('//localhost:3000/getMessages').then(function(obj){
@@ -35,6 +36,7 @@
       callback(obj);
    });
   };
+  //hashtags
   factory.getHashTags = function (callback) {
     console.log('requesting hashtags');
     $http.get('//localhost:3000/getHashTags').then(function(obj){
@@ -50,6 +52,16 @@
       callback(obj);
    });
   };
+  // users
+  factory.createUser = function (user) {
+    user.auth ? user.auth = user.auth : user.auth = 0;
+
+    $http.post('//localhost:3000/users', user).then(function (user) {
+      console.log('success saving user!', user);
+    });
+  };
+
+
   return factory;
 },
 ]);
