@@ -3,6 +3,7 @@ angular.module('app', [
   'ui.bootstrap',
   'home.ctrl',
   'feed.ctrl',
+  'auth.ctrl',
   'profile.ctrl',
   'chart.ctrl',
   'db.factory',
@@ -16,27 +17,22 @@ angular.module('app', [
     .state('home', {
       url:'/',
        views: {
-          '@': {  // unnamed ui-view element thats in the index.html
+          '@': {
             templateUrl: 'home/index.html',
             controller: 'homeCtrl',
           },
-
-          //'nav' is the ui-view element named 'nav' thats in 'main' states template (mainDisplay.html)
+          'auth@home': { templateUrl: 'auth/auth.html', controller: 'authCtrl' },
           'feed@home': { templateUrl: 'feed/feed.html', controller: 'feedCtrl' },
           'profile@home': { templateUrl: '/profile/profile.html', controller: 'profileCtrl' },
           'chart@home': { templateUrl: '/chart/chart.html', controller:'chartCtrl' },
-          // 'donate@main': { templateUrl: '/donate/donate.html', controller:'donateCtrl' },
         },
-    });
-    
-  
+    });  
   $urlRouterProvider.otherwise('/');
-
 })
+
 .run(function($rootScope){
+  console.log($rootScope.hashTagData); 
   $rootScope.hashTagKeys,$rootScope.hashTagValues;  
-  console.log($rootScope.hashTagData);
-  
 });
 
 

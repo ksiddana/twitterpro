@@ -18,7 +18,7 @@ app.use(express.static(__dirname + './../public'));
 app.use(bodyParser.json());
 
 //subrouters
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 
 
@@ -36,6 +36,11 @@ app.post('/ezTweet', function (req,res){
 ///////////////////////////////////
 /////////dbroutes///////////////
 ///////////////////////////////////
+
+app.get('/api/:model/:data') {
+
+};
+
 
 app.get('/allTargets', function (req,res) {
   db.helpers.allTargets(res);
@@ -58,7 +63,15 @@ app.get('/getHashTags', function (req,res) {
 app.post('/addHashTag', function (req,res) {
   db.helpers.addHashTag(req.body.text, res);
 });
-
+// users
+app.post('/users', function (req, res) {
+  db.helpers.createUser(req.body, function(user){
+    console.log('user', user);
+    
+    console.log('back in server.js post /users callback', user);
+    res.status(200).send(user);
+  });
+});
 
 
 

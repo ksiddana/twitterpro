@@ -17,7 +17,7 @@ tweetBot.getUserObj = function (user,res) {
       console.log("error in getUserObj");
       console.log(err);
     }else{
-      console.log('returned twitter obj')
+      console.log('returned twitter obj');
       res.status(200).send(obj);
     }
   });
