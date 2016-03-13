@@ -30,7 +30,6 @@ factory.stream = {
     });
   }
 };
-
 var counter = {};
 factory.handleTweet = function (tweet) {
     var tweetArr = tweet.text.split(' ');
@@ -45,7 +44,7 @@ factory.handleTweet = function (tweet) {
         counter[tweetArr[i]]++;
         // reset the root scope arrays
         $rootScope.hashTagKeys = [];
-        $rootScope.hashTagValues = [[]];
+        $rootScope.hashTagValues = [];
         // loop through the counter
         for (var key in counter) {
           if (counter[key] > 0 && key.length < 17) {
@@ -54,13 +53,13 @@ factory.handleTweet = function (tweet) {
                 //push key
                 $rootScope.hashTagKeys.push(key);
                 // push value
-                $rootScope.hashTagValues[0].push(counter[key]);  
+                $rootScope.hashTagValues.push(counter[key]);  
               } else {
                 $rootScope.$apply(function(){
                 //push key
                 $rootScope.hashTagKeys.push(key);
                 // push value
-                $rootScope.hashTagValues[0].push(counter[key]);
+                $rootScope.hashTagValues.push(counter[key]);
               });
               }
             } else {

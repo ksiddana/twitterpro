@@ -1,13 +1,27 @@
 var express = require('express');
-var db = require('./db.js');
-var port = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
-var tweetBot = require('./twitter.js');
+var morgan = require('morgan');
 var schedule = require('node-schedule');
 
+// twitter bot 
+var tweetBot = require('./twitter.js');
+
+// database
+var db = require('./db.js');
+
+// server config
+var port = process.env.PORT || 3000;
 var app = express();
+
+// middleware
 app.use(express.static(__dirname + './../public'));
 app.use(bodyParser.json());
+
+//subrouters
+// app.use('/api', apiRouter);
+
+
+
 
 app.post('/ezTweet', function (req,res){
   console.log('post to ezTweet recieved', req.body);
