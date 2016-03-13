@@ -62,9 +62,7 @@ factory.handleTweet = function (tweet) {
                 $rootScope.hashTagValues.push(counter[key]);
               });
               }
-            } else {
-              console.log('skipping key: ', key);
-            }
+            } 
           }
         }
       }

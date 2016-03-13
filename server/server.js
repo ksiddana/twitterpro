@@ -18,7 +18,7 @@ app.use(express.static(__dirname + './../public'));
 app.use(bodyParser.json());
 
 //subrouters
-app.use('/api', apiRouter);
+// app.use('/api', require('./routers/apiRoutes.js'));
 
 
 
@@ -37,103 +37,56 @@ app.post('/ezTweet', function (req,res){
 /////////dbroutes///////////////
 ///////////////////////////////////
 
-app.get('/api/:model/:data') {
+// fetch from db
+app.get('/api/models/:model/:key/:value', function(req,res){
+  var searchObject = {};
+  searchObject[req.params.key] = req.params.value;
+  db.helpers.handleGet(req.params.model, searchObject, function(results){
+    res.status(200).send(results);
+  });
+});
+// create new model
+app.post('/api/models/:model', function(req,res){
+  db.helpers.handlePost(req.params.model, req.body, function(results){
+    res.status(200).send(results);
+  });
+});
+// delete a model
+app.delete('/api/models/:model/:key/:value', function(req,res){
+  var searchObject = {};
+  searchObject[req.params.key] = req.params.value;
 
-};
-
-
-app.get('/allTargets', function (req,res) {
-  db.helpers.allTargets(res);
+  db.handleDelete(req.params.model, searchObject, function(){
+    res.status(200).send();
+  });
 });
-app.post('/addTarget', function (req,res) {
-  db.helpers.addTarget(req.body.handle, req.body.interval, res);
-});
-
-////// messages
-app.get('/getMessages', function (req,res) {
-  db.helpers.getMessages(res);
-});
-app.post('/addMessage', function (req,res) {
-  db.helpers.addMessage(req.body.text, res);
-});
-////// hashtags
-app.get('/getHashTags', function (req,res) {
-  db.helpers.getHashTags(res);
-});
-app.post('/addHashTag', function (req,res) {
-  db.helpers.addHashTag(req.body.text, res);
-});
-// users
-app.post('/users', function (req, res) {
-  db.helpers.createUser(req.body, function(user){
-    console.log('user', user);
-    
-    console.log('back in server.js post /users callback', user);
-    res.status(200).send(user);
+// change a model
+app.put('/api/models/:model', function(req, res) {
+  db.helpers.handlePut(req.params.model, req.body, function(results){
+    res.status(200).send(results);
   });
 });
 
+//
+// twitter
+//
 
-
-/// twitter
 app.post('/userObj', function (req,res) {
   tweetBot.getUserObj(req.body.handle, res);
 });
-// app.post('/data', function (req,res,next) {
-//   var book = new db.books(req.body);
-//   book.save(function (err, book) {
-//     console.log('DB ERROR /book post',err, book)
-//   });
-//   res.status(200).send();
 
-// });
-
-// app.post('/dataUpdate', function (req,res,next) {
-//   console.log('attempting to update book', req.body.title, req.body.price, req.body.quantity);
-//   db.books.update({'title' : req.body.title}, { $set : {'price': req.body.price, 'quantity': req.body.quantity}}, function(err,data){
-//     console.log('after update callback.  ERR', err)
-//   })
-//   res.status(200).send();
-// });
-
-// app.post('/dataDelete', function (req,res,next) {
-//   console.log('attempting to delete book', req.body.title);
-//   db.books.remove({'title' : req.body.title}, function(err,data){
-//     console.log('after update callback.  ERR', err)
-//   })
-//   res.status(200).send();
-// });
-  
-  /////////////////////////////////////
-  //////////USERS//////////////////////
-  /////////////////////////////////////
-
-// app.post('/auth', function (req,res) {
-//   db.users.find(req.body, function (err, data) {
-//     res.status(200).send(data);
-//   })
-// })
-
-
-// app.post('/user', function (req,res) {
-//   var user = new db.users(req.body);
-//   console.log(req.body)
-//   user.save(function (err, user) {
-//     console.error('\n\nDB ERROR /user post', user, err)
-//   })
-//   res.status(200).send();
-// })
+//this is terrible need to fix.
 var autoTweet = function () {
   var targets,messages,hashtags;
-
+  // wait
   db.Target.find({}).then(function(data){
     targets = data;
     console.log('targets done', targets);
-
+    // wait
     db.Message.find({}).then(function(data){
       messages = data;
       console.log('messages done', messages);
-
+      //wait
       db.HashTag.find({}).then(function(data){
         hashtags = data;
         console.log('hashtags done', hashtags);
@@ -142,15 +95,11 @@ var autoTweet = function () {
           var size = array.length;
           return array[Math.floor(Math.random() * size)];
         };
-
-
-
       
         for (var i = 0; i < targets.length; i++) {
           targets[i].loop = new schedule.scheduleJob('* * * * *', function(target, messages){
             console.log('cron____________________');
             console.log(randomElement(messages).text, ' #' + randomElement(hashtags).text);
-            // tweetBot.tweet(randomElement(messages).text, ' #' + randomElement(hashtags).text);
           }.bind(null, targets[i], messages, hashtags));
         }
       });

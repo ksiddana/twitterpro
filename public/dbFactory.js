@@ -56,7 +56,7 @@
   factory.createUser = function (user) {
     user.auth ? user.auth = user.auth : user.auth = 0;
 
-    $http.post('//localhost:3000/users', user).then(function (user) {
+    $http.post('//localhost:3000/api/models/user', user).then(function (user) {
       console.log('success saving user!', user);
     });
   };
