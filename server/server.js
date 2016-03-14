@@ -115,7 +115,7 @@ var autoTweet = function() {
             console.log('cron message________@' + target.handle + '_________');
             console.log('message: ', message);
             // uncomment to enable tweets
-            tweetBot.sendTweetToUser(target.handle, message);
+            // tweetBot.sendTweetToUser(target.handle, message);
           }.bind(null, targets[i], messages, hashtags));
           console.log(targets[i].interval);
         }

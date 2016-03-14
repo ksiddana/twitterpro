@@ -23,6 +23,8 @@
       <label class="sr-only" for="exampleInputEmail3">Change Stream</label>
       <input type="text" class="form-control" id="exampleInputEmail3" placeholder="enter term to track" ng-model="query">
     <button type="submit" class="btn btn-primary" ng-click="changeStream(query)">Change Stream</button>
+    <img class="play-icon" src="./libs/playIcon.png" ng-hide="streaming" ng-click="pauseStream()">
+    <img class="pause-icon" src="./libs/pauseIcon.png" ng-show="streaming" ng-click="pauseStream()">
     </div>
   </form>
   </div>
