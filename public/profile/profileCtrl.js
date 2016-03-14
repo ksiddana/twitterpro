@@ -35,20 +35,20 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
     // targets
     $scope.fetchTargets = function () {
       dbFactory.getModel('target', '/all/true', function (results){
-        $scope.targets = results;
+        $scope.target = results;
         console.log('results from fetching all targets: ', results);
       });
     };
     // messages
     $scope.fetchMessages = function () {
       dbFactory.getModel('message', '/all/true', function (results){
-        $scope.messages = results;
+        $scope.message = results;
       });
     };
     // hashtags
     $scope.fetchHashtags = function () {
       dbFactory.getModel('hashtag', '/all/true', function (results){
-        $scope.hashtags = results;
+        $scope.hashtag = results;
       });      
     };
     // invoke
@@ -123,7 +123,14 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
     $scope.deleteModel = function (type, $index) {
       console.log('$index', $index);
       console.log('type', type);
-      
+      console.log($scope[type][$index]);
+      console.log('/api/models/'+ type +'/_id/' + $scope[type][$index]['_id']);
+      dbFactory.deleteModel(type, '/_id/' + $scope[type][$index]['_id'], function(results){
+        console.log('model deleted');
+        $scope.fetchTargets();
+        $scope.fetchMessages();
+        $scope.fetchHashtags();
+      });
     };
     
 

@@ -14,9 +14,9 @@
 <div class="card card-block" ng-show='toggle === 0'>
   <h4 class="card-title">Targets</h4>
   <ul class="list-group scroll-list">
-  <li class="target-item list-group-item" ng-repeat="target in targets">
-    <p class="target-handle"><b>Handle: </b>{{target.handle}}</p>
-    <p class="target-interval"><b>Interval: </b>{{target.interval}}</p>
+  <li class="target-item list-group-item" ng-repeat="targetEl in target track by $index">
+    <p class="target-handle"><b>Handle: </b>{{targetEl.handle}}</p>
+    <p class="target-interval"><b>Interval: </b>{{targetEl.interval}}</p>
     <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('target', $index)">
   </li>
 </ul>
@@ -156,9 +156,9 @@
 <div class="card card-block messages" ng-show='toggle === 1'>
   <h4 class="card-title">Messages</h4>
   <ul class="list-group scroll-list">
-  <li class="list-group-item" ng-repeat="message in messages">
-    <span>{{message.text}}</span>
-    <img class="cancel-icon" src="./libs/xIcon.png">
+  <li class="list-group-item" ng-repeat="messageEl in message track by $index">
+    <span>{{messageEl.text}}</span>
+    <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('message', $index)">
   </li>
 </ul>
   <p class="card-text"></p>
@@ -176,9 +176,9 @@
 <div class="card card-block" ng-show='toggle === 2'>
   <h4 class="card-title">Hashtags</h4>
   <ul class="list-group scroll-list">
-  <li class="list-group-item" ng-repeat="hashtag in hashtags">
-    <span>{{hashtag.text}}</span>
-    <img class="cancel-icon" src="./libs/xIcon.png">
+  <li class="list-group-item" ng-repeat="hashtagEl in hashtag track by $index">
+    <span>{{hashtagEl.text}}</span>
+    <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('hashtag', $index)">
   </li>
 </ul>
   <p class="card-text"></p>

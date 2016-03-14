@@ -44,22 +44,22 @@ factory.handleTweet = function (tweet) {
         counter[tweetArr[i]]++;
         // reset the root scope arrays
         $rootScope.hashTagKeys = [];
-        $rootScope.hashTagValues = [];
+        $rootScope.hashTagValues = [[]];
         // loop through the counter
         for (var key in counter) {
-          if (counter[key] > 0 && key.length < 17) {
+          if (counter[key] > 2 && key.length < 17) {
             var phase = $rootScope.$$phase;
             if (phase == '$apply' || phase == '$digest') {
                 //push key
                 $rootScope.hashTagKeys.push(key);
                 // push value
-                $rootScope.hashTagValues.push(counter[key]);  
+                $rootScope.hashTagValues[0].push(counter[key]);  
               } else {
                 $rootScope.$apply(function(){
                 //push key
                 $rootScope.hashTagKeys.push(key);
                 // push value
-                $rootScope.hashTagValues.push(counter[key]);
+                $rootScope.hashTagValues[0].push(counter[key]);
               });
               }
             } 
