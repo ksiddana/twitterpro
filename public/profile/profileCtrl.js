@@ -1,138 +1,140 @@
 angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
-  
-  .controller('profileCtrl',['$scope','dbFactory', 'tweetFactory', '$log',function($scope, dbFactory, tweetFactory, $log){
-    $scope.user = {};
-    $scope.toggle = 0;
-    console.log('in profileCtrl');
-    // load "users" profile
-    tweetFactory.getUserObj("1213Coder", function (user){ $scope.user.twitter = user; });
 
-    // create and invoke functions to refresh $scope from db;
-    // get data and save to scope
-    $scope.cronHandler = function (cronType, value) {
-      console.log(cronType, value);
-      $scope.userCron[cronType] = value;
-    };
+.controller('profileCtrl', ['$scope', 'dbFactory', 'tweetFactory', '$log', function($scope, dbFactory, tweetFactory, $log) {
+  $scope.user = {};
+  $scope.toggle = 0;
+  console.log('in profileCtrl');
+  // load "users" profile
+  tweetFactory.getUserObj("1213Coder", function(user) {
+    $scope.user.twitter = user;
+  });
 
-    $scope.makeCronTab = function (cron) {
-      var result = '';
-      if (!cron) {
-        cron = $scope.userCron;
+  // create and invoke functions to refresh $scope from db;
+  // get data and save to scope
+  $scope.cronHandler = function(cronType, value) {
+    console.log(cronType, value);
+    $scope.userCron[cronType] = value;
+  };
+
+  $scope.makeCronTab = function(cron) {
+    var result = '';
+    if (!cron) {
+      cron = $scope.userCron;
+    }
+    for (var key in cron) {
+      if (cron[key] === 'every') {
+        result += '* ';
+      } else {
+        result += cron[key] + ' ';
       }
-      for (var key in cron) {
-        if (cron[key] === 'every') {
-          result += '* ';
-        } else {
-          result += cron[key] + ' ';
-        }
-      }
-      console.log(result);
-      result = result.substring(0, result.length - 1);
-      console.log(result);
-      return result;
-    };
+    }
+    console.log(result);
+    result = result.substring(0, result.length - 1);
+    console.log(result);
+    return result;
+  };
 
-    // targets
-    $scope.fetchTargets = function () {
-      dbFactory.getModel('target', '/all/true', function (results){
-        $scope.target = results;
-        console.log('results from fetching all targets: ', results);
-      });
-    };
-    // messages
-    $scope.fetchMessages = function () {
-      dbFactory.getModel('message', '/all/true', function (results){
-        $scope.message = results;
-      });
-    };
-    // hashtags
-    $scope.fetchHashtags = function () {
-      dbFactory.getModel('hashtag', '/all/true', function (results){
-        $scope.hashtag = results;
-      });      
-    };
-    // invoke
-    $scope.fetchTargets();
-    $scope.fetchMessages();
-    $scope.fetchHashtags();
+  // targets
+  $scope.fetchTargets = function() {
+    dbFactory.getModel('target', '/all/true', function(results) {
+      $scope.target = results;
+      console.log('results from fetching all targets: ', results);
+    });
+  };
+  // messages
+  $scope.fetchMessages = function() {
+    dbFactory.getModel('message', '/all/true', function(results) {
+      $scope.message = results;
+    });
+  };
+  // hashtags
+  $scope.fetchHashtags = function() {
+    dbFactory.getModel('hashtag', '/all/true', function(results) {
+      $scope.hashtag = results;
+    });
+  };
+  // invoke
+  $scope.fetchTargets();
+  $scope.fetchMessages();
+  $scope.fetchHashtags();
 
 
-    // functions for creating models
-    // callback called after adding a member;
+  // functions for creating models
+  // callback called after adding a member;
 
-    // targets
-    $scope.addTarget = function (newTarget) {
-      console.log('before', newTarget);
-      newTarget.interval = $scope.makeCronTab();
-      console.log('after', newTarget);
-      dbFactory.createModel('target', newTarget, function(results){
-        $scope.fetchTargets();
-      });
-    };
+  // targets
+  $scope.addTarget = function(newTarget) {
+    console.log('before', newTarget);
+    newTarget.interval = $scope.makeCronTab();
+    console.log('after', newTarget);
+    dbFactory.createModel('target', newTarget, function(results) {
+      $scope.fetchTargets();
+    });
+  };
 
-    // messages
-    $scope.addMessage = function (message) {
-      dbFactory.createModel('message', message, function (results) {
-        $scope.fetchMessages();
-      });
-    };
+  // messages
+  $scope.addMessage = function(message) {
+    dbFactory.createModel('message', message, function(results) {
+      $scope.fetchMessages();
+    });
+  };
 
-    // hashtags
-    $scope.addHashtag = function (hashtag) {
-      dbFactory.createModel('hashtag', hashtag, function (results){
-        $scope.fetchHashtags();
-      });
-    };
+  // hashtags
+  $scope.addHashtag = function(hashtag) {
+    dbFactory.createModel('hashtag', hashtag, function(results) {
+      $scope.fetchHashtags();
+    });
+  };
 
-    $scope.logger = function(i) {
-      $scope.toggle = i;
-    };
+  $scope.logger = function(i) {
+    $scope.toggle = i;
+  };
 
-    // dropdowns
-    $scope.userCron = {
-      minute:'every',
-      hour:'every',
-      day: 'every',
-      month:'every',
-      dayOfWeek:'every',
-    };
+  // dropdowns
+  $scope.userCron = {
+    minute: 'every',
+    hour: 'every',
+    day: 'every',
+    month: 'every',
+    dayOfWeek: 'every'
+  };
 
 
-    $scope.items = [
-      'The first choice!',
-      'And another choice for you.',
-      'but wait! A third!'
-    ];
+  $scope.items = [
+    'The first choice!',
+    'And another choice for you.',
+    'but wait! A third!'
+  ];
 
-    $scope.status1 = {
-      isopen: false
-    };
+  $scope.status1 = {
+    isopen: false
+  };
 
-    $scope.toggled = function(open) {
-      $log.log('Dropdown is now: ', open);
-    };
+  $scope.toggled = function(open) {
+    $log.log('Dropdown is now: ', open);
+  };
 
-    $scope.toggleDropdown = function($event) {
-      console.log('event', $event);
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.status.isopen = !$scope.status.isopen;
-      
-    };
+  $scope.toggleDropdown = function($event) {
+    console.log('event', $event);
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.status.isopen = !$scope.status.isopen;
 
-    $scope.deleteModel = function (type, $index) {
-      console.log('$index', $index);
-      console.log('type', type);
-      console.log($scope[type][$index]);
-      console.log('/api/models/'+ type +'/_id/' + $scope[type][$index]['_id']);
-      dbFactory.deleteModel(type, '/_id/' + $scope[type][$index]['_id'], function(results){
-        console.log('model deleted');
-        $scope.fetchTargets();
-        $scope.fetchMessages();
-        $scope.fetchHashtags();
-      });
-    };
-    
+  };
+
+  $scope.deleteModel = function(type, $index) {
+    console.log('$index', $index);
+    console.log('type', type);
+    console.log($scope[type][$index]);
+    console.log('/api/models/' + type + '/_id/' + $scope[type][$index]['_id']);
+    dbFactory.deleteModel(type, '/_id/' + $scope[type][$index]['_id'], function(results) {
+      console.log('model deleted');
+      $scope.fetchTargets();
+      $scope.fetchMessages();
+      $scope.fetchHashtags();
+    });
+  };
+
 
 
 
@@ -142,5 +144,4 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
 
 
 
-  },
-  ]);
+}, ]);

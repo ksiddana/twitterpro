@@ -2,3 +2,5 @@
 node_modules
 jspm_packages
 twitterKeys.js
+.tern-port
+*/**/.tern-port

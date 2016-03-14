@@ -11,17 +11,17 @@ var idStrings = {};
 var tweetBot = {};
 
 // requests user data from twitter, takes a user ID or screenname??
-tweetBot.getUserObj = function (user,res) {
-  twit.get('users/show', {screen_name:user}, function(err,obj){
-    if (err) {
-      console.log("error in getUserObj");
-      console.log(err);
-    }else{
-      console.log('returned twitter obj')
-      res.status(200).send(obj);
-    }
-  });
-};
+// tweetBot.getUserObj = function (user,res) {
+  // twit.get('users/show', {screen_name:user}, function(err,obj){
+    // if (err) {
+      // console.log("error in getUserObj");
+      // console.log(err);
+    // }else{
+      // console.log('returned twitter obj')
+      // res.status(200).send(obj);
+    // }
+  // });
+// };
 
 // attaches a handle to a message and tweets it.
 tweetBot.sendTweetToUser = function(user,tweet) {
