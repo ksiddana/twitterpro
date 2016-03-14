@@ -119,6 +119,12 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
       $scope.status.isopen = !$scope.status.isopen;
       
     };
+
+    $scope.deleteModel = function (type, $index) {
+      console.log('$index', $index);
+      console.log('type', type);
+      
+    };
     
 
 

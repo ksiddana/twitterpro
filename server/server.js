@@ -23,9 +23,9 @@ app.use(bodyParser.json());
 
 
 
-app.post('/ezTweet', function (req,res){
-  console.log('post to ezTweet recieved', req.body);
-  tweetBot.tweet(req.body);
+app.get('/twitterStream/:query', function (req,res){
+  console.log('post to ezTweet recieved');
+  tweetBot.init(io, req.params.query);
   res.status(200).send();
 });
 

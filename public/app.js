@@ -24,7 +24,6 @@ angular.module('app', [
           'auth@home': { templateUrl: 'auth/auth.html', controller: 'authCtrl' },
           'feed@home': { templateUrl: 'feed/feed.html', controller: 'feedCtrl' },
           'profile@home': { templateUrl: '/profile/profile.html', controller: 'profileCtrl' },
-          // 'targets@profile@home': { templateUrl: '/profile/targets.html', controller: 'profileCtrl' },
           'chart@home': { templateUrl: '/chart/chart.html', controller:'chartCtrl' },
         },
     });  

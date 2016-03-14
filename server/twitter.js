@@ -50,9 +50,12 @@ tweetBot.tweet = function(tweetString) {
 
 
 // initiate the stream.
-tweetBot.init = function(io){
+tweetBot.init = function(io, query){
+  if (!query) {
+    query = "javascript";
+  }
   var tweetsBuffer = [];
-  twit.stream('statuses/filter', { track:'javascript' }, function(stream){
+  twit.stream('statuses/filter', { track:query }, function(stream){
     console.log('--------------------');
     console.log('Connected to twitter');
     console.log('--------------------');

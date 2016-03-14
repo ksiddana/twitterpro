@@ -13,19 +13,30 @@
 <!-- targets -->
 <div class="card card-block" ng-show='toggle === 0'>
   <h4 class="card-title">Targets</h4>
+  <ul class="list-group scroll-list">
+  <li class="target-item list-group-item" ng-repeat="target in targets">
+    <p class="target-handle"><b>Handle: </b>{{target.handle}}</p>
+    <p class="target-interval"><b>Interval: </b>{{target.interval}}</p>
+    <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('target', $index)">
+  </li>
+</ul>
   <p class="card-text"></p>
   <!-- form -->
   <form class="form-inline">
     <div class="form-group">
       <label class="sr-only" for="exampleInputEmail3">handle</label>
       <!-- handle input -->
+
+    <div>
+      
       <input class="form-control" id="exampleInputEmail3" placeholder="handle" ng-model=newTarget.handle>
 
+      <button type="submit" class="btn btn-primary" ng-model="newtarget" ng-click='addTarget(newTarget)'>add target</button>
+    </div>
       <!--  -->
       <!-- cron inputs -->
-      <div class=form-group ng-model=userCron>
-        <div>{{userCron}}</div>
-        
+      <div class="form-group dropdowns" ng-model=userCron>
+        <div>min: {{userCron.minute}} hour: {{userCron.hour}} day: {{userCron.day}} month: {{userCron.month}} weekday: {{userCron.dayOfWeek}}</div>
       <div class="btn-group" uib-dropdown is-open="status1.isopen">
         <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
           minute <span class="caret"></span>
@@ -36,7 +47,6 @@
           <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 30)">30</a></li>
           <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 45)">45</a></li>
         </ul>
-      </div>
       </div>
 
       <div class="btn-group" uib-dropdown is-open="status2.isopen">
@@ -135,22 +145,22 @@
           
         </ul>
       </div>     
+      </div>
     <!--  -->
       <!-- <input class="form-control" placeholder="interval" ng-model=newTarget.interval></input> --> 
-      <button type="submit" class="btn btn-primary" ng-model="newtarget" ng-click='addTarget(newTarget)'>add target</button>
     </div>
   </form>
   <!-- list of targets -->
-  <ul class="list-group">
-  <li class="target-item list-group-item" ng-repeat="target in targets">
-    <p class="target-handle"><b>Handle: </b>{{target.handle}}</p>
-    <p class="target-interval"><b>Interval: </b>{{target.interval}}</p>
-  </li>
-</ul>
 </div>
 <!-- messages -->
 <div class="card card-block messages" ng-show='toggle === 1'>
   <h4 class="card-title">Messages</h4>
+  <ul class="list-group scroll-list">
+  <li class="list-group-item" ng-repeat="message in messages">
+    <span>{{message.text}}</span>
+    <img class="cancel-icon" src="./libs/xIcon.png">
+  </li>
+</ul>
   <p class="card-text"></p>
   <form class="form-inline" ng-model="newMessage">
     <div class="form-group">
@@ -161,15 +171,16 @@
   </form>
   
   
-  <ul class="list-group">
-  <li class="list-group-item" ng-repeat="message in messages">
-    <span>{{message.text}}</span>
-  </li>
-</ul>
 </div>
 <!-- hashtags -->
 <div class="card card-block" ng-show='toggle === 2'>
   <h4 class="card-title">Hashtags</h4>
+  <ul class="list-group scroll-list">
+  <li class="list-group-item" ng-repeat="hashtag in hashtags">
+    <span>{{hashtag.text}}</span>
+    <img class="cancel-icon" src="./libs/xIcon.png">
+  </li>
+</ul>
   <p class="card-text"></p>
   <form class="form-inline" ng-model="newHashtag">
     <div class="form-group">
@@ -178,11 +189,6 @@
     <button type="submit" class="btn btn-primary" ng-model="newHashTag" ng-click='addHashtag(newHashtag)'>add hashtag</button>
     </div>
   </form>
-  <ul class="list-group">
-  <li class="list-group-item" ng-repeat="hashtag in hashtags">
-    <span>{{hashtag.text}}</span>
-  </li>
-</ul>
 </div>
 </div>
 </div>
