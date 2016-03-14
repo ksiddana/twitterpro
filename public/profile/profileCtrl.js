@@ -3,6 +3,9 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
   .controller('profileCtrl',['$scope','dbFactory', 'tweetFactory', '$log',function($scope, dbFactory, tweetFactory, $log){
     $scope.user = {};
     $scope.toggle = 0;
+    $scope.newTarget = {};
+    $scope.newMessage = {};
+    $scope.newHashtag = {};
     console.log('in profileCtrl');
     // load "users" profile
     tweetFactory.getUserObj("1213Coder", function (user){ $scope.user.twitter = user; });
@@ -67,6 +70,7 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
       console.log('after', newTarget);
       dbFactory.createModel('target', newTarget, function(results){
         $scope.fetchTargets();
+        $scope.newTarget.handle = '';
       });
     };
 
@@ -74,6 +78,7 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
     $scope.addMessage = function (message) {
       dbFactory.createModel('message', message, function (results) {
         $scope.fetchMessages();
+        $scope.newMessage.text = '';
       });
     };
 
@@ -81,6 +86,7 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
     $scope.addHashtag = function (hashtag) {
       dbFactory.createModel('hashtag', hashtag, function (results){
         $scope.fetchHashtags();
+        $scope.newHashtag.text = '';
       });
     };
 
@@ -96,7 +102,6 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
       month:'every',
       dayOfWeek:'every',
     };
-
 
     $scope.items = [
       'The first choice!',
