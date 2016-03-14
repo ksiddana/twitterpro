@@ -4,12 +4,17 @@
   "description": "a simple bot for scheduling tweets",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/server.js"
   },
   "author": "raphael baskerville",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.7",
     "morgan": "^1.7.0",
+    "node-schedule": "^1.1.0",
+    "socket.io": "^1.4.5",
     "twitter": "^1.2.5"
   }
 }

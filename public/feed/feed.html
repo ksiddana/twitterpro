@@ -5,28 +5,28 @@
   </uib-tabset>
 
   <div class="feed-box">
-    
-  <h4 class="card-title">Twitter Feed</h4>
 
-  <ul class="list-group feed-list">
-    <li class="list-group-item tweet" ng-repeat ="tweet in tweets">
-      <em>
+    <h4 class="card-title">Twitter Feed</h4>
+
+    <ul class="list-group feed-list">
+      <li class="list-group-item tweet" ng-repeat="tweet in tweets">
+        <em>
         <span class="handle">{{tweet.user.name}}</span>
       </em>
-      <span class="tweet-text">{{tweet.text}}</span>
-    </li>
-  </ul>
-  <p class="card-text"></p>
+        <span class="tweet-text">{{tweet.text}}</span>
+      </li>
+    </ul>
+    <p class="card-text"></p>
 
-  <form class="form-inline">
-    <div class="form-group">
-      <label class="sr-only" for="exampleInputEmail3">Change Stream</label>
-      <input type="text" class="form-control" id="exampleInputEmail3" placeholder="enter term to track" ng-model="query">
-    <button type="submit" class="btn btn-primary" ng-click="changeStream(query)">Change Stream</button>
-    <img class="play-icon" src="./libs/playIcon.png" ng-hide="streaming" ng-click="pauseStream()">
-    <img class="pause-icon" src="./libs/pauseIcon.png" ng-show="streaming" ng-click="pauseStream()">
-    </div>
-  </form>
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputEmail3">Change Stream</label>
+        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="enter term to track" ng-model="query">
+        <button type="submit" class="btn btn-primary" ng-click="changeStream(query)">Change Stream</button>
+        <img class="play-icon" src="./libs/playIcon.png" ng-hide="streaming" ng-click="pauseStream()">
+        <img class="pause-icon" src="./libs/pauseIcon.png" ng-show="streaming" ng-click="pauseStream()">
+      </div>
+    </form>
   </div>
- 
+
 </div>
