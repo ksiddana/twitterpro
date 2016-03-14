@@ -81,15 +81,28 @@ var autoTweet = function () {
   // wait
   db.Target.find({}).then(function(data){
     targets = data;
-    console.log('targets done', targets);
+    console.log('targets done');
+    targets.forEach(function (target) {
+      console.log(target.handle);
+    });
+    console.log('________________');
     // wait
     db.Message.find({}).then(function(data){
       messages = data;
-      console.log('messages done', messages);
+      console.log('messages done');
+      messages.forEach(function(message){
+        console.log(message.text);
+      });
+      console.log('________________');
       //wait
       db.HashTag.find({}).then(function(data){
         hashtags = data;
-        console.log('hashtags done', hashtags);
+        console.log('hashtags done');
+        hashtags.forEach(function(hashtag){
+          console.log(hashtag.text);
+        });
+        console.log('________________');
+        // console.log('hashtags done', hashtags);
 
         function randomElement (array) {
           var size = array.length;
@@ -97,16 +110,22 @@ var autoTweet = function () {
         };
       
         for (var i = 0; i < targets.length; i++) {
-          targets[i].loop = new schedule.scheduleJob('* * * * *', function(target, messages){
-            console.log('cron____________________');
-            console.log(randomElement(messages).text, ' #' + randomElement(hashtags).text);
+          targets[i].loop = new schedule.scheduleJob(targets[i].interval, function(target){
+            message = randomElement(messages).text + ' #' + randomElement(hashtags).text;
+            console.log('cron message________@' + target.handle + '_________');
+            console.log('message: ', message );
+            // uncomment to enable tweets
+            // tweetBot.sendTweetToUser(target.handle, message);
           }.bind(null, targets[i], messages, hashtags));
+          console.log(targets[i].interval);
         }
       });
     });
   });
 };
-// autoTweet();  
+
+
+autoTweet();  
 console.log('app listening: ', port);
 var server = app.listen(port);
 var io = require('socket.io').listen(server);

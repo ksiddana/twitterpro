@@ -1,10 +1,12 @@
 
   angular.module('db.factory', [])
 
-.factory('dbFactory', ['$http','$rootScope', function ($http, $rootScope) {
+.factory('dbFactory', ['$http', function ($http) {
   var factory = {};
 
 // crud functionality for all models
+
+// use '/all/true' to get all models
 factory.getModel = function (type, searchTerms, callback){
   console.log('getting models');
   console.log('type: ', type);
@@ -23,19 +25,19 @@ factory.deleteModel = function (type, searchTerms, callback) {
   });
 };
 
-factory.updateModel = function(type, searchTerms, payload, callback ) {
+factory.updateModel = function(type, payload, callback ) {
   console.log('updating model');
   console.log('type: ', type);
-  $http.put('//localhost:3000/' + type + searchTerms, payload).then(function (results){
+  $http.put('//localhost:3000/api/models/' + type, payload).then(function (results){
     console.log('success in updating model');
     callback(results.data);
   });
 };
 
-factory.createModel = function(type, search, payload, callback){
+factory.createModel = function(type, payload, callback){
   console.log('creating model');
   console.log('type', type);
-  $http.post('//localhost:3000/' + type + searchTerms, payload).then(function (results) {
+  $http.post('//localhost:3000/api/models/' + type, payload).then(function (results) {
     console.log('success in creating model');
     callback(results.data);
   });

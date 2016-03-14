@@ -13,3 +13,17 @@
   height:300px;
   overflow: scroll;
 }
+.target-handle{
+  display:inline-block;
+  width:45%;
+  margin-left: 5px;
+}
+.target-interval{
+  display:inline-block;
+  width: 45%;
+}
+.target-item{
+  padding: 5px 5px 5px 5px;
+  height: 25px;
+  font-size: 12px;
+}
