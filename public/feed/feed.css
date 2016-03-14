@@ -27,6 +27,12 @@
   height : 200px;
   overflow: scroll;
 }
-.feed-main{
+.feed-main {
 
+}
+.play-icon {
+  height: 30px;
+}
+.pause-icon {
+  height:30px;
 }
