@@ -135,13 +135,6 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
     });
   };
 
-
-
-
   $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-
-
-
-
 
 }, ]);

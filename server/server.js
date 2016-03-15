@@ -20,21 +20,14 @@ app.use(bodyParser.json());
 //subrouters
 // app.use('/api', require('./routers/apiRoutes.js'));
 
-
-
-
 app.get('/twitterStream/:query', function(req, res) {
   console.log('post to ezTweet recieved');
   tweetBot.init(io, req.params.query);
   res.status(200).send();
 });
 
-
-
-
-
 ///////////////////////////////////
-/////////dbroutes///////////////
+/////////dbroutes//////////////////
 ///////////////////////////////////
 
 // fetch from db
@@ -124,8 +117,8 @@ var autoTweet = function() {
   });
 };
 
-
 autoTweet();
+
 console.log('app listening: ', port);
 var server = app.listen(port);
 var io = require('socket.io').listen(server);
