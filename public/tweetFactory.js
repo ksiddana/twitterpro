@@ -47,7 +47,6 @@ factory.handleTweet = function (tweet) {
         $rootScope.hashTagValues = [[]];
         // loop through the counter
         for (var key in counter) {
-          console.log("streaming?: ", $rootScope.streaming);
           if (counter[key] > 2 && key.length < 17) {
             var phase = $rootScope.$$phase;
             if (phase == '$apply' || phase == '$digest') {

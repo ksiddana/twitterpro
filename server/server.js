@@ -20,11 +20,6 @@ app.use(bodyParser.json());
 //subrouters
 // app.use('/api', require('./routers/apiRoutes.js'));
 
-app.get('/twitterStream/:query', function(req, res) {
-  console.log('post to ezTweet recieved');
-  tweetBot.init(io, req.params.query);
-  res.status(200).send();
-});
 
 ///////////////////////////////////
 /////////dbroutes//////////////////
@@ -68,7 +63,14 @@ app.post('/userObj', function(req, res) {
   tweetBot.getUserObj(req.body.handle, res);
 });
 
-//this is terrible need to fix.
+app.post('/twitterStream', function(req, res) {
+  console.log('post /twitterStream recieved: changing stream');
+  tweetBot.changeStream(io, req.body);
+  res.status(200).send('SERVER: changed stream');
+});
+
+
+//TODO: this is terrible need to fix.
 var autoTweet = function() {
   var targets, messages, hashtags;
   // wait
@@ -108,7 +110,7 @@ var autoTweet = function() {
             console.log('cron message________@' + target.handle + '_________');
             console.log('message: ', message);
             // uncomment to enable tweets
-            // tweetBot.sendTweetToUser(target.handle, message);
+            tweetBot.sendTweetToUser(target.handle, message);
           }.bind(null, targets[i], messages, hashtags));
           console.log(targets[i].interval);
         }
