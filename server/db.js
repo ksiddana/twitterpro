@@ -60,6 +60,7 @@ var HashTag = mongoose.model('HashTag', HashTagSchema);
 var User = mongoose.model('User', UserSchema);
 
 var helpers = {};
+
 var models = {
   target: Target,
   message: Message,
