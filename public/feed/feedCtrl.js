@@ -7,6 +7,7 @@ angular.module('feed.ctrl', ['tweet.factory'])
   $scope.tweets = [];
   $scope.tracking = 'default';
   tweetFactory.stream.on('tweets', function(data) {
+    console.log('incoming tweet: ', data);
     tweetFactory.handleTweet(data[0]);
     if ($scope.streaming) {
       $scope.tweets = data.concat($scope.tweets);
@@ -26,5 +27,9 @@ angular.module('feed.ctrl', ['tweet.factory'])
     $log.info('clicked');
     $scope.streaming = !$scope.streaming;
     $log.log('streaming?: ', $scope.streaming);
+  };
+  $scope.getTweet = function(i){
+    console.log('clicked: ', $scope.tweets[i]);
+    
   };
 }, ]);

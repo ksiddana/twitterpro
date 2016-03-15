@@ -58,7 +58,13 @@ app.put('/api/models/:model', function(req, res) {
 //
 // twitter
 //
-
+app.get('/twitter/statuses/show/:id', function (req, res) {
+  console.log("SERVER: get /twitter/statuses/" + req.params.id);
+  tweetBot.getTweetById(req.params.id, function (results){
+    console.log('SERVER: tweet fetched');
+    res.status(200).send(results);
+  });
+});
 app.post('/userObj', function(req, res) {
   tweetBot.getUserObj(req.body.handle, res);
 });

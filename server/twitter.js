@@ -75,6 +75,8 @@ tweetBot.init = function(io, query) {
     stream.on('data', function(tweet) {
       var msg = {};
       msg.text = tweet.text;
+      msg.tweet = tweet;
+      msg.id = tweet.id_str;
       msg.user = {
         name: tweet.user.name,
         image: tweet.user.profile_image_url
@@ -101,6 +103,7 @@ tweetBot.init = function(io, query) {
     stream.on('data', function(tweet) {
       var msg = {};
       msg.text = tweet.text;
+      msg.id = tweet.id_str;
       msg.tweet = tweet;
       msg.user = {
         name: tweet.user.name,
@@ -116,6 +119,12 @@ tweetBot.init = function(io, query) {
     });
   });
 };
+  tweetBot.getTweetById = function (id, callback) {
+    twit.get('statuses/show/' + id, function (response) {
+      callback(response);
+      console.log('TWITTER: get message success', response);
+    });
+  }
   
 
 
