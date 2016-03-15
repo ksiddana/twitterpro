@@ -12,7 +12,6 @@ angular.module('app', [
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
-  console.log('in config');
   $stateProvider
     .state('home', {
       url: '/',
@@ -43,7 +42,7 @@ angular.module('app', [
 })
 
 .run(function($rootScope) {
-  console.log($rootScope.hashTagData);
+  console.log('$rootScope.hashTagData in config is: ', $rootScope.hashTagData);
   $rootScope.hashTagKeys, $rootScope.hashTagValues;
 });
 

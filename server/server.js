@@ -3,7 +3,10 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var schedule = require('node-schedule');
 
-// twitter bot 
+var server = app.listen(port);
+var io = require('socket.io').listen(server);
+
+// twitter bot
 var tweetBot = require('./twitter.js');
 
 // database
@@ -58,9 +61,9 @@ app.put('/api/models/:model', function(req, res) {
 //
 // twitter
 //
-app.get('/twitter/statuses/show/:id', function (req, res) {
+app.get('/twitter/statuses/show/:id', function(req, res) {
   console.log("SERVER: get /twitter/statuses/" + req.params.id);
-  tweetBot.getTweetById(req.params.id, function (results){
+  tweetBot.getTweetById(req.params.id, function(results) {
     console.log('SERVER: tweet fetched');
     res.status(200).send(results);
   });
@@ -128,6 +131,4 @@ var autoTweet = function() {
 autoTweet();
 
 console.log('app listening: ', port);
-var server = app.listen(port);
-var io = require('socket.io').listen(server);
 tweetBot.init(io);

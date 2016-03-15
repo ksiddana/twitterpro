@@ -3,7 +3,6 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
 .controller('profileCtrl', ['$scope', 'dbFactory', 'tweetFactory', '$log', function($scope, dbFactory, tweetFactory, $log) {
   $scope.user = {};
   $scope.toggle = 0;
-  console.log('in profileCtrl');
   // load "users" profile
   tweetFactory.getUserObj("1213Coder", function(user) {
     $scope.user.twitter = user;
