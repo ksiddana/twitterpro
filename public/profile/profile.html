@@ -1,196 +1,195 @@
-
 <div ng-model="user" class="profile-main">
   <!-- <img ng-src={{user.twitter.profile_image_url}}> -->
-  <div >
-    
+  <div>
+
     <uib-tabset active="active">
-    <uib-tab index="0" heading="Targets" ng-click='logger(0)'></uib-tab>
-    <uib-tab index="1" heading="Messages" ng-click='logger(1)'></uib-tab>
-    <uib-tab index="2" heading="Hashtags" ng-click='logger(2)'></uib-tab>
-  </uib-tabset>
-  <div class="profile-box">
-    
-    <!-- targets -->
-    <div class="card card-block" ng-show='toggle === 0'>
-      <h4 class="card-title">Targets</h4>
-      <ul class="list-group scroll-list">
-        <li class="target-item list-group-item" ng-repeat="targetEl in target track by $index">
-          <p class="target-handle"><b>Handle: </b>{{targetEl.handle}}</p>
-          <p class="target-interval"><b>Interval: </b>{{targetEl.interval}}</p>
-          <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('target', $index)">
-        </li>
-      </ul>
-      <p class="card-text"></p>
-      <!-- form -->
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail3">handle</label>
-          <!-- handle input -->
+      <uib-tab index="0" heading="Targets" ng-click='logger(0)'></uib-tab>
+      <uib-tab index="1" heading="Messages" ng-click='logger(1)'></uib-tab>
+      <uib-tab index="2" heading="Hashtags" ng-click='logger(2)'></uib-tab>
+    </uib-tabset>
+    <div class="profile-box">
 
-          <div>
-            
-            <input class="form-control" id="exampleInputEmail3" placeholder="handle" ng-model=newTarget.handle>
+      <!-- targets -->
+      <div class="card card-block" ng-show='toggle === 0'>
+        <h4 class="card-title">Targets</h4>
+        <ul class="list-group scroll-list">
+          <li class="target-item list-group-item" ng-repeat="targetEl in target track by $index">
+            <p class="target-handle"><b>Handle: </b>{{targetEl.handle}}</p>
+            <p class="target-interval"><b>Interval: </b>{{targetEl.interval}}</p>
+            <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('target', $index)">
+          </li>
+        </ul>
+        <p class="card-text"></p>
+        <!-- form -->
+        <form class="form-inline">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">handle</label>
+            <!-- handle input -->
 
-            <button type="submit" class="btn btn-primary" ng-model="newtarget" ng-click='addTarget(newTarget)'>add target</button>
-          </div>
-          <!--  -->
-          <!-- cron inputs -->
-          <div class="form-group dropdowns" ng-model=userCron>
-            <div>min: {{userCron.minute}} hour: {{userCron.hour}} day: {{userCron.day}} month: {{userCron.month}} weekday: {{userCron.dayOfWeek}}</div>
-            <div class="btn-group" uib-dropdown is-open="status1.isopen">
-              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+            <div>
+
+              <input class="form-control" id="exampleInputEmail3" placeholder="handle" ng-model=newTarget.handle>
+
+              <button type="submit" class="btn btn-primary" ng-model="newtarget" ng-click='addTarget(newTarget)'>add target</button>
+            </div>
+            <!--  -->
+            <!-- cron inputs -->
+            <div class="form-group dropdowns" ng-model=userCron>
+              <div>min: {{userCron.minute}} hour: {{userCron.hour}} day: {{userCron.day}} month: {{userCron.month}} weekday: {{userCron.dayOfWeek}}</div>
+              <div class="btn-group" uib-dropdown is-open="status1.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
                 minute <span class="caret"></span>
               </button>
-              <ul uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-model="userCron.minute">
-                <li role="menuitem"><a href="#" ng-click="cronHandler('minute', *)">EVERY</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 0)">00</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 15)">15</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 30)">30</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 45)">45</a></li>
-              </ul>
-            </div>
+                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button" ng-model="userCron.minute">
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('minute', '*')">EVERY</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 0)">00</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 15)">15</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 30)">30</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('minute', 45)">45</a></li>
+                </ul>
+              </div>
 
-            <div class="btn-group" uib-dropdown is-open="status2.isopen">
-              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              <div class="btn-group" uib-dropdown is-open="status2.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
                 hour <span class="caret"></span>
               </button>
-              <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', *)">EVERY</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 8)">8am</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 9)">9am</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 10)">10am</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 11)">11am</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour',12)">12pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 13)">1pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 14)">2pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 15)">3pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 16)">4pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 17)">5pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 18)">6pm</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 19)">7pm</a></li>
-              </ul>
-            </div>
+                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', '*')">EVERY</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 8)">8am</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 9)">9am</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 10)">10am</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 11)">11am</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 12)">12pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 13)">1pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 14)">2pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 15)">3pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 16)">4pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 17)">5pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 18)">6pm</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('hour', 19)">7pm</a></li>
+                </ul>
+              </div>
 
-            <div class="btn-group" uib-dropdown is-open="status3.isopen">
-              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              <div class="btn-group" uib-dropdown is-open="status3.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
                 day <span class="caret"></span>
               </button>
-              <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', *)">EVERY</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 0)">1</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 1)">2</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 2)">3</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 3)">4</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 4)">5</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 5)">6</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 6)">7</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 7)">8</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 8)">9</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 9)">10</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 10)">11</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 11)">12</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 12)">13</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 13)">14</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 14)">15</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 15)">16</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 16)">17</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 17)">18</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 18)">19</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 19)">20</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 20)">21</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 21)">22</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 22)">23</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 23)">24</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 24)">25</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 25)">26</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 26)">27</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 27)">28</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 28)">29</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 29)">30</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('day', 30)">31</a></li>
-              </ul>
-            </div>
+                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', '*')">EVERY</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 0)">1</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 1)">2</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 2)">3</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 3)">4</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 4)">5</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 5)">6</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 6)">7</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 7)">8</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 8)">9</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 9)">10</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 10)">11</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 11)">12</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 12)">13</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 13)">14</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 14)">15</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 15)">16</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 16)">17</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 17)">18</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 18)">19</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 19)">20</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 20)">21</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 21)">22</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 22)">23</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 23)">24</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 24)">25</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 25)">26</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 26)">27</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 27)">28</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 28)">29</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 29)">30</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('day', 30)">31</a></li>
+                </ul>
+              </div>
 
-            <div class="btn-group" uib-dropdown is-open="status4.isopen">
-              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              <div class="btn-group" uib-dropdown is-open="status4.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
                 month <span class="caret"></span>
               </button>
-              <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',*)">EVERY</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',0)">JAN</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',1)">FEB</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',2)">MAR</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',3)">APR</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',4)">MAY</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',5)">JUN</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',6)">JUL</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',7)">AUG</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',8)">SEPT</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',9)">OCT</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',10)">NOV</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('month',11)">DEC</a></li>
-              </ul>
-            </div>
+                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', '*')">EVERY</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 0)">JAN</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 1)">FEB</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 2)">MAR</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 3)">APR</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 4)">MAY</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 5)">JUN</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 6)">JUL</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 7)">AUG</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 8)">SEPT</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 9)">OCT</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 10)">NOV</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('month', 11)">DEC</a></li>
+                </ul>
+              </div>
 
-            <div class="btn-group" uib-dropdown is-open="status5.isopen">
-              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              <div class="btn-group" uib-dropdown is-open="status5.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
                 Day of week <span class="caret"></span>
               </button>
-              <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', *)">EVERY</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 0)">SUN</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 1)">MON</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 2)">TUE</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 3)">WED</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 4)">THUR</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 5)">FRI</a></li>
-                <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 6)">SAT</a></li>
-                
-              </ul>
-            </div>     
+                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', '*')">EVERY</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 0)">SUN</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 1)">MON</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 2)">TUE</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 3)">WED</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 4)">THUR</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 5)">FRI</a></li>
+                  <li role="menuitem"><a href="#" ng-click="cronHandler('dayOfWeek', 6)">SAT</a></li>
+
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
 
 
-    <!-- messages -->
-    <div class="card card-block messages" ng-show='toggle === 1'>
-      <h4 class="card-title">Messages</h4>
-      <ul class="list-group scroll-list">
-        <li class="list-group-item" ng-repeat="messageEl in message track by $index">
-          <span>{{messageEl.text}}</span>
-          <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('message', $index)">
-        </li>
-      </ul>
-      <p class="card-text"></p>
-      <form class="form-inline" ng-model="newMessage">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail3">handle</label>
-          <input class="form-control" id="exampleInputEmail3" placeholder="message" ng-model=newMessage.text>
-          <button type="submit" class="btn btn-primary" ng-model="newMessage" ng-click='addMessage(newMessage)'>add message</button>
-        </div>
-      </form>
-    </div>
+      <!-- messages -->
+      <div class="card card-block messages" ng-show='toggle === 1'>
+        <h4 class="card-title">Messages</h4>
+        <ul class="list-group scroll-list">
+          <li class="list-group-item" ng-repeat="messageEl in message track by $index">
+            <span>{{messageEl.text}}</span>
+            <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('message', $index)">
+          </li>
+        </ul>
+        <p class="card-text"></p>
+        <form class="form-inline" ng-model="newMessage">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">handle</label>
+            <input class="form-control" id="exampleInputEmail3" placeholder="message" ng-model=newMessage.text>
+            <button type="submit" class="btn btn-primary" ng-model="newMessage" ng-click='addMessage(newMessage)'>add message</button>
+          </div>
+        </form>
+      </div>
 
 
-    <!-- hashtags -->
-    <div class="card card-block" ng-show='toggle === 2'>
-      <h4 class="card-title">Hashtags</h4>
-      <ul class="list-group scroll-list">
-        <li class="list-group-item" ng-repeat="hashtagEl in hashtag track by $index">
-          <span>{{hashtagEl.text}}</span>
-          <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('hashtag', $index)">
-        </li>
-      </ul>
-      <p class="card-text"></p>
-      <form class="form-inline" ng-model="newHashtag">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail3">handle</label>
-          <input class="form-control" id="exampleInputEmail3" placeholder="hashTag" ng-model="newHashtag.text">
-          <button type="submit" class="btn btn-primary" ng-model="newHashTag" ng-click='addHashtag(newHashtag)'>add hashtag</button>
-        </div>
-      </form>
+      <!-- hashtags -->
+      <div class="card card-block" ng-show='toggle === 2'>
+        <h4 class="card-title">Hashtags</h4>
+        <ul class="list-group scroll-list">
+          <li class="list-group-item" ng-repeat="hashtagEl in hashtag track by $index">
+            <span>{{hashtagEl.text}}</span>
+            <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('hashtag', $index)">
+          </li>
+        </ul>
+        <p class="card-text"></p>
+        <form class="form-inline" ng-model="newHashtag">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">handle</label>
+            <input class="form-control" id="exampleInputEmail3" placeholder="hashTag" ng-model="newHashtag.text">
+            <button type="submit" class="btn btn-primary" ng-model="newHashTag" ng-click='addHashtag(newHashtag)'>add hashtag</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
