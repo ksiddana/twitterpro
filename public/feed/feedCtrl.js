@@ -1,13 +1,12 @@
 angular.module('feed.ctrl', ['tweet.factory'])
 
 .controller('feedCtrl', ['$scope', 'tweetFactory', '$http', '$rootScope', '$log', function($scope, tweetFactory, $http, $rootScope, $log) {
-
   console.log('feedCTRL');
+
   $scope.streaming = true;
   $scope.tweets = [];
   $scope.tracking = 'default';
   tweetFactory.stream.on('tweets', function(data) {
-    console.log('incoming tweet: ', data);
     tweetFactory.handleTweet(data[0]);
     if ($scope.streaming) {
       $scope.tweets = data.concat($scope.tweets);

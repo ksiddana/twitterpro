@@ -97,6 +97,7 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
 
   // targets
   $scope.addTarget = function(newTarget) {
+    $scope.newTarget = "";
     newTarget.list = $scope.activeList;
     newTarget.interval = $scope.makeCronTab();
     dbFactory.createModel('target', newTarget, function(results) {
@@ -107,12 +108,14 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
   // messages
   $scope.addMessage = function(message) {
     message.list = $scope.activeList;
+    $scope.newMessage = "";
     dbFactory.createModel('message', message, function(results) {
       $scope.fetchMessages();
     });
   };
   // list
   $scope.addList = function(list) {
+    $scope.newList = "";
     console.log(list);
     dbFactory.createModel('list', list, function(results) {
       $scope.fetchLists();
@@ -121,6 +124,7 @@ angular.module('profile.ctrl', ['db.factory', 'tweet.factory'])
 
   // hashtags
   $scope.addHashtag = function(hashtag) {
+    $scope.newHashtag = "";
     hashtag.list = $scope.activeList;
     dbFactory.createModel('hashtag', hashtag, function(results) {
       $scope.fetchHashtags();
