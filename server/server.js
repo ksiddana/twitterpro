@@ -125,7 +125,7 @@ var autoTweet = function() {
   });
 };
 
-autoTweet();
+// autoTweet();
 
 console.log('app listening: ', port);
 var server = app.listen(port);

@@ -3,15 +3,36 @@
   <div>
 
     <uib-tabset active="active">
-      <uib-tab index="0" heading="Targets" ng-click='logger(0)'></uib-tab>
-      <uib-tab index="1" heading="Messages" ng-click='logger(1)'></uib-tab>
-      <uib-tab index="2" heading="Hashtags" ng-click='logger(2)'></uib-tab>
+      <uib-tab index="0" heading="Lists" ng-click='logger(0)'></uib-tab>
+      <uib-tab index="1" heading="Targets" ng-click='logger(1)'></uib-tab>
+      <uib-tab index="2" heading="Messages" ng-click='logger(2)'></uib-tab>
+      <uib-tab index="3" heading="Hashtags" ng-click='logger(3)'></uib-tab>
     </uib-tabset>
     <div class="profile-box">
 
-      <!-- targets -->
+      <!-- lists -->
       <div class="card card-block" ng-show='toggle === 0'>
-        <h4 class="card-title">Targets</h4>
+        <h4 class="card-title">Active List: {{activeList}}</h4>
+        <ul class="list-group scroll-list">
+          <li class="list-group-item" ng-click="userChangeList($index)" ng-repeat="listEl in list track by $index">
+            <span>{{listEl.name}}</span>
+            <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('list', $index)">
+          </li>
+        </ul>
+        <p class="card-text"></p>
+        <form class="form-inline" ng-model="newList">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">list</label>
+            <input class="form-control" id="exampleInputEmail3" placeholder="list" ng-model=newList.name>
+            <button type="submit" class="btn btn-primary" ng-model="newlist" ng-click='addList(newList)'>add list</button>
+          </div>
+        </form>
+      </div>
+
+
+        <!-- targets -->
+      <div class="card card-block" ng-show='toggle === 1'>
+        <h4 class="card-title">Targets for {{activeList.name}}</h4>
         <ul class="list-group scroll-list">
           <li class="target-item list-group-item" ng-repeat="targetEl in target track by $index">
             <p class="target-handle"><b>Handle: </b>{{targetEl.handle}}</p>
@@ -19,20 +40,17 @@
             <img class="cancel-icon" src="./libs/xIcon.png" ng-click="deleteModel('target', $index)">
           </li>
         </ul>
+
+        <!-- dropdown/buttons/inputs -->
         <p class="card-text"></p>
-        <!-- form -->
         <form class="form-inline">
           <div class="form-group">
             <label class="sr-only" for="exampleInputEmail3">handle</label>
-            <!-- handle input -->
-
             <div>
-
               <input class="form-control" id="exampleInputEmail3" placeholder="handle" ng-model=newTarget.handle>
-
               <button type="submit" class="btn btn-primary" ng-model="newtarget" ng-click='addTarget(newTarget)'>add target</button>
             </div>
-            <!--  -->
+
             <!-- cron inputs -->
             <div class="form-group dropdowns" ng-model=userCron>
               <div>min: {{userCron.minute}} hour: {{userCron.hour}} day: {{userCron.day}} month: {{userCron.month}} weekday: {{userCron.dayOfWeek}}</div>
@@ -154,7 +172,7 @@
 
 
       <!-- messages -->
-      <div class="card card-block messages" ng-show='toggle === 1'>
+      <div class="card card-block messages" ng-show='toggle === 2'>
         <h4 class="card-title">Messages</h4>
         <ul class="list-group scroll-list">
           <li class="list-group-item" ng-repeat="messageEl in message track by $index">
@@ -174,7 +192,7 @@
 
 
       <!-- hashtags -->
-      <div class="card card-block" ng-show='toggle === 2'>
+      <div class="card card-block" ng-show='toggle === 3'>
         <h4 class="card-title">Hashtags</h4>
         <ul class="list-group scroll-list">
           <li class="list-group-item" ng-repeat="hashtagEl in hashtag track by $index">
