@@ -23,17 +23,17 @@ var UserSchema = mongoose.Schema({
   },
   password: String,
   twitterId: String,
-  admin: Number,
+  admin: Number
 });
 
 var ListSchema = mongoose.Schema({
   name: {
     type: String,
     index: {
-      unique: true,
-    },
+      unique: true
+    }
   },
-  user: String,
+  user: String
 });
 
 var TargetSchema = mongoose.Schema({
@@ -44,7 +44,7 @@ var TargetSchema = mongoose.Schema({
     }
   },
   interval: String,
-  list: String,
+  list: String
 });
 
 var MessageSchema = mongoose.Schema({
@@ -163,8 +163,10 @@ helpers.handlePut = function(model, payload, callback) {
 };
 
 console.log('db is feeling good');
+
 module.exports = {
   Target: Target,
+  User: User,
   Message: Message,
   HashTag: HashTag,
   helpers: helpers

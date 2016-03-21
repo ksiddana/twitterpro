@@ -5,3 +5,9 @@ twitterKeys.js
 .tern-port
 */**/.tern-port
 npm-debug.log
+
+# API keys and secrets
+.env
+
+# OS metadata
+.DS_Store
