@@ -19,6 +19,7 @@ angular.module('tweet.factory', [])
   });
 };
 
+
 var socket = io.connect('//localhost:3000');
 factory.stream = {
   on: function (eventName, callback) {
@@ -36,7 +37,7 @@ factory.handleTweet = function (tweet) {
     // loop trough the words in the tweet
     for (var i = 0; i < tweetArr.length; i++) {
       // if a word is a hashtag
-      if (/(^|\s)(#[a-z\d-]+)/.test(tweetArr[i])) {
+      if (/(^|\s)(#[a-z|A-Z\d-]+)/.test(tweetArr[i])) {
         // increment the counter
         if (!counter[tweetArr[i]]) {
           counter[tweetArr[i]] = 0;
@@ -47,7 +48,7 @@ factory.handleTweet = function (tweet) {
         $rootScope.hashTagValues = [[]];
         // loop through the counter
         for (var key in counter) {
-          if (counter[key] > 2 && key.length < 17) {
+          if (counter[key] > 3 && key.length < 17) {
             var phase = $rootScope.$$phase;
             if (phase == '$apply' || phase == '$digest') {
                 //push key

@@ -14,34 +14,6 @@ db.once('open', function() {
 
 });
 
-var TargetSchema = mongoose.Schema({
-  handle: {
-    type: String,
-    index: {
-      unique: true
-    }
-  },
-  interval: String
-});
-
-var MessageSchema = mongoose.Schema({
-  text: {
-    type: String,
-    index: {
-      unique: true
-    }
-  }
-});
-
-var HashTagSchema = mongoose.Schema({
-  text: {
-    type: String,
-    index: {
-      unique: true
-    }
-  }
-});
-
 var UserSchema = mongoose.Schema({
   username: {
     type: String,
@@ -51,13 +23,56 @@ var UserSchema = mongoose.Schema({
   },
   password: String,
   twitterId: String,
-  admin: Number
+  admin: Number,
 });
+
+var ListSchema = mongoose.Schema({
+  name: {
+    type: String,
+    index: {
+      unique: true,
+    },
+  },
+  user: String,
+});
+
+var TargetSchema = mongoose.Schema({
+  handle: {
+    type: String,
+    index: {
+      unique: true
+    }
+  },
+  interval: String,
+  list: String,
+});
+
+var MessageSchema = mongoose.Schema({
+  text: {
+    type: String,
+    index: {
+      unique: true
+    }
+  },
+  list: String,
+});
+
+var HashTagSchema = mongoose.Schema({
+  text: {
+    type: String,
+    index: {
+      unique: true
+    }
+  },
+  list: String,
+});
+
 
 var Target = mongoose.model('target', TargetSchema);
 var Message = mongoose.model('message', MessageSchema);
 var HashTag = mongoose.model('HashTag', HashTagSchema);
 var User = mongoose.model('User', UserSchema);
+var List = mongoose.model('List', ListSchema);
 
 var helpers = {};
 
@@ -65,7 +80,8 @@ var models = {
   target: Target,
   message: Message,
   hashtag: HashTag,
-  user: User
+  user: User,
+  list: List,
 };
 
 // HANDLES GET REQUESTS TO /API/MODELS

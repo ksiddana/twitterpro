@@ -1,8 +1,8 @@
 angular.module('feed.ctrl', ['tweet.factory'])
 
 .controller('feedCtrl', ['$scope', 'tweetFactory', '$http', '$rootScope', '$log', function($scope, tweetFactory, $http, $rootScope, $log) {
-
   console.log('feedCTRL');
+
   $scope.streaming = true;
   $scope.tweets = [];
   $scope.tracking = 'default';

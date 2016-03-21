@@ -128,7 +128,7 @@ var autoTweet = function() {
   });
 };
 
-autoTweet();
+// autoTweet();
 
 console.log('app listening: ', port);
 tweetBot.init(io);

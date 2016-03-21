@@ -14,29 +14,17 @@ angular.module('app', [
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
-      url: '/',
-      views: {
-        '@': {
-          templateUrl: 'home/index.html',
-          controller: 'homeCtrl'
-        },
-        'auth@home': {
-          templateUrl: 'auth/auth.html',
-          controller: 'authCtrl'
-        },
-        'feed@home': {
-          templateUrl: 'feed/feed.html',
-          controller: 'feedCtrl'
-        },
-        'profile@home': {
-          templateUrl: '/profile/profile.html',
-          controller: 'profileCtrl'
-        },
-        'chart@home': {
-          templateUrl: '/chart/chart.html',
-          controller: 'chartCtrl'
+      url:'/',
+       views: {
+          '@': {
+            templateUrl: 'home/index.html',
+            controller: 'homeCtrl'
+          },
+          'auth@home': { templateUrl: 'auth/auth.html', controller: 'authCtrl' },
+          'feed@home': { templateUrl: 'feed/feed.html', controller: 'feedCtrl' },
+          'profile@home': { templateUrl: '/profile/profile.html', controller: 'profileCtrl' },
+          'chart@home': { templateUrl: '/chart/chart.html', controller:'chartCtrl' }
         }
-      }
     });
   $urlRouterProvider.otherwise('/');
 })
@@ -46,10 +34,3 @@ angular.module('app', [
   $rootScope.hashTagKeys, $rootScope.hashTagValues;
 });
 
-
-
-// .controller('mainCtrl', function($scope) {
-
-//   $scope.welcome = $scope;
-
-// });
