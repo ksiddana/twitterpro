@@ -2,6 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var schedule = require('node-schedule');
+var dotenv = require('dotenv');
+
+//Load environment variables from .env file, where API keys and passwords
 
 var server = app.listen(port);
 var io = require('socket.io').listen(server);
