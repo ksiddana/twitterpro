@@ -3,29 +3,48 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var schedule = require('node-schedule');
 var dotenv = require('dotenv');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var tweetBot = require('./twitter.js');
 
-//Load environment variables from .env file, where API keys and passwords
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ *
+ * Default path: .env (You can remove the path argument entirely, after renaming `.env.example` to `.env`)
+ * dotenv.load({ path: '.env.example' });
+ */
+dotenv.load();
 
+/**
+ * API keys and Passport configuration.
+ */
+var passportConfig = require('./config/passport');
+
+/**
+ * Create Express server and set-up socket.io
+ */
+var app = express();
+var port = process.env.PORT || 3000;
 var server = app.listen(port);
 var io = require('socket.io').listen(server);
 
-// twitter bot
-var tweetBot = require('./twitter.js');
+/**
+ * Connect to MongoDB.
+ */
+mongoose.connect(process.env.MONGODB || process.env.MONGOLAB_URI);
+mongoose.connection.on('error', function() {
+  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+  process.exit(1);
+});
 
-// database
-var db = require('./db.js');
-
-// server config
-var port = process.env.PORT || 3000;
-var app = express();
-
-// middleware
+/**
+ * Express configuration.
+ */
 app.use(express.static(__dirname + './../public'));
 app.use(bodyParser.json());
-
-//subrouters
-// app.use('/api', require('./routers/apiRoutes.js'));
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 ///////////////////////////////////
 /////////dbroutes//////////////////
