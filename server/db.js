@@ -1,78 +1,9 @@
-var mongoose = require('mongoose');
-// var Schema = mongoose.Schema;
-
-// specify which db to use and where it is.
-mongoose.connect('mongodb://localhost/twitterBot');
-
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, "Connected error"));
-
-db.once('open', function() {
-
-  console.log("we're connected port:3000");
-
-});
-
-var UserSchema = mongoose.Schema({
-  username: {
-    type: String,
-    index: {
-      unique: true
-    }
-  },
-  password: String,
-  twitterId: String,
-  admin: Number
-});
-
-var ListSchema = mongoose.Schema({
-  name: {
-    type: String,
-    index: {
-      unique: true
-    }
-  },
-  user: String
-});
-
-var TargetSchema = mongoose.Schema({
-  handle: {
-    type: String,
-    index: {
-      unique: true
-    }
-  },
-  interval: String,
-  list: String
-});
-
-var MessageSchema = mongoose.Schema({
-  text: {
-    type: String,
-    index: {
-      unique: true
-    }
-  },
-  list: String,
-});
-
-var HashTagSchema = mongoose.Schema({
-  text: {
-    type: String,
-    index: {
-      unique: true
-    }
-  },
-  list: String,
-});
 
 
-var Target = mongoose.model('target', TargetSchema);
-var Message = mongoose.model('message', MessageSchema);
-var HashTag = mongoose.model('HashTag', HashTagSchema);
-var User = mongoose.model('User', UserSchema);
-var List = mongoose.model('List', ListSchema);
+
+
+
+
 
 var helpers = {};
 
